@@ -17,4 +17,8 @@ export { default as frontend } from "./frontend.svg";
 export { default as nofrontend } from "./nofrontend.svg";
 export { default as backend } from "./backend.svg";
 export { default as nobackend } from "./nobackend.svg";
+export { default as mainLogo } from "./mainLogo.svg";
+export { default as rightArrow } from "./rightArrow.svg";
+export { default as leftArrow } from "./leftArrow.svg";
+export { default as back } from "./back.svg";
 // export {default as } from ""
