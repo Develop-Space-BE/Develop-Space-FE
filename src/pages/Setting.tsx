@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "../components/common(공통컴포넌트)/Header";
-import MyView from "../components/mypage/MyView";
+import SetView from "../components/setpage/SetView";
 
-const Mypage = () => {
+const Setting = () => {
   return (
     <div>
       <Header />
-      <MyView />
+      <SetView />
     </div>
   );
 };
 
-export default Mypage;
+export default Setting;
