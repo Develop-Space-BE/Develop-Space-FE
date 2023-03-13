@@ -1,23 +1,33 @@
 import React from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { back, gear, mainLogo, spacesuit } from "../../asset/pic";
 
 const Header = () => {
+  const navigate: NavigateFunction = useNavigate();
   const url: string = window.location.pathname;
   if (url.includes("mainlist")) {
     return (
       <HeaderDiv>
-        <img src={mainLogo} alt="메인로고" />
-        <img src={spacesuit} alt="마이페이지 버튼" />
+        <img
+          src={mainLogo}
+          alt="메인로고"
+          onClick={() => navigate("/mainlist")}
+        />
+        <img
+          src={spacesuit}
+          alt="마이페이지 버튼"
+          onClick={() => navigate("/mypage/1")}
+        />
       </HeaderDiv>
     );
   } else if (url.includes("mypage")) {
     return (
       <HeaderDiv2>
         <span>
-          <img src={back} alt="메인로고" />
+          <img src={back} alt="뒤로가기" />
           <h3>마이페이지</h3>
-          <img src={gear} alt="마이페이지 버튼" />
+          <img src={gear} alt="설정 버튼" />
         </span>
       </HeaderDiv2>
     );
@@ -25,7 +35,7 @@ const Header = () => {
     return (
       <HeaderDiv2>
         <span>
-          <img src={back} alt="메인로고" />
+          <img src={back} alt="뒤로가기" />
           <h3>설정</h3>
           <div />
         </span>
@@ -34,7 +44,7 @@ const Header = () => {
   } else {
     return (
       <HeaderDiv>
-        <img src={back} alt="메인로고" />
+        <img src={back} alt="뒤로가기" />
         <img src="" alt="카테고리" />
         <img src={spacesuit} alt="마이페이지 버튼" />
       </HeaderDiv>
@@ -45,8 +55,8 @@ const Header = () => {
 export default Header;
 
 const HeaderDiv = styled.div`
-  width: 80%;
-  margin: 15% auto 5%;
+  width: 90%;
+  margin: 15% auto 10%;
   display: flex;
   justify-content: space-between;
 `;

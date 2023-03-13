@@ -22,4 +22,12 @@ export { default as rightArrow } from "./rightArrow.svg";
 export { default as leftArrow } from "./leftArrow.svg";
 export { default as back } from "./back.svg";
 export { default as gear } from "./Gear.svg";
+export { default as react } from "./React.svg";
+export { default as noreact } from "./noReact.svg";
+export { default as vue } from "./vue.svg";
+export { default as novue } from "./novue.svg";
+export { default as spring } from "./spring.svg";
+export { default as nospring } from "./nospring.svg";
+export { default as node } from "./node.svg";
+export { default as nonode } from "./nonode.svg";
 // export {default as } from ""
