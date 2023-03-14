@@ -8,7 +8,7 @@ const Hr = () => {
 export default Hr;
 
 const HrLine = styled.hr`
-  height: 1%;
-  background-color: ${(props) => props.theme.color.transparent};
+  height: 15px;
+  background-color: ${(props) => props.theme.color.mypageBackGround};
   border: transparent;
 `;
