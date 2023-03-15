@@ -25,9 +25,17 @@ const Header = () => {
     return (
       <HeaderDiv2>
         <span>
-          <img src={back} alt="뒤로가기" />
+          <img
+            src={back}
+            alt="뒤로가기"
+            onClick={() => navigate("/mainlist")}
+          />
           <h3>마이페이지</h3>
-          <img src={gear} alt="설정 버튼" />
+          <img
+            src={gear}
+            alt="설정 버튼"
+            onClick={() => navigate("/setting")}
+          />
         </span>
       </HeaderDiv2>
     );
@@ -35,7 +43,11 @@ const Header = () => {
     return (
       <HeaderDiv2>
         <span>
-          <img src={back} alt="뒤로가기" />
+          <img
+            src={back}
+            alt="뒤로가기"
+            onClick={() => navigate("/mypage/1")}
+          />
           <h3>설정</h3>
           <div />
         </span>
