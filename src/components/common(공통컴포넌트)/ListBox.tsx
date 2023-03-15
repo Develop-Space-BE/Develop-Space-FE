@@ -12,7 +12,7 @@ const ListBox: React.FC<Props> = ({ children }) => {
 export default ListBox;
 
 const ListView = styled.div`
-  width: 80%;
+  width: 90%;
   height: 120px;
   margin: 5% auto 0;
   border: 1px solid ${(props) => props.theme.color.listWhite};

@@ -23,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     text-decoration: none;
     outline: none;
-    
   }
   html, body{
     font-family: "Noto Sans KR" ,sans-serif;
