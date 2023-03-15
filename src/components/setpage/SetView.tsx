@@ -12,24 +12,32 @@ const SetView = () => {
       </MyPicture>
       <Hr />
       <Box>
-        <h3>정보</h3>
+        <h2>정보</h2>
       </Box>
       <MiniHr />
       <Box>
         <div>이름</div>
-        <div>1</div>
+        <span>뭘보노보노</span>
       </Box>
       <MiniHr />
       <Box>
         <div>생년월일</div>
-        <div>1</div>
+        <span>96년도</span>
       </Box>
       <MiniHr />
       <Box>
         <div>닉네임</div>
-        <div>1</div>
+        <button>변경하기</button>
+      </Box>
+      <Hr />
+      <Box>
+        <div>문의하기</div>
       </Box>
       <MiniHr />
+      <Box>
+        <div>우주미아</div>
+        <button>탈퇴하기</button>
+      </Box>
     </SetViewAll>
   );
 };
@@ -46,12 +54,26 @@ const MyPicture = styled.div`
 `;
 
 const Box = styled.div`
-  h3,
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
+  h2,
   div {
     display: flex;
     align-items: center;
-    margin: 0 auto;
-    width: 90%;
     height: 50px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  button,
+  span {
+    display: flex;
+    align-items: center;
+    border: ${(props) => props.theme.color.transparent};
+    background-color: ${(props) => props.theme.color.transparent};
+    color: ${(props) => props.theme.color.fontColor};
   }
 `;
