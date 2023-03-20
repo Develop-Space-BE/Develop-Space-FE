@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { OnOffModal } from "../../modals/\bOnOffModal";
+import Modal from "../../modals/Modal";
 import Hr from "../common(공통컴포넌트)/Hr";
 import MiniHr from "../common(공통컴포넌트)/MiniHr";
 import Profile from "../common(공통컴포넌트)/Profile";
 
 const SetView = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   return (
     <SetViewAll>
+      {modalOpen && (
+        <Modal OnModal={() => OnOffModal(modalOpen, setModalOpen)}>
+          <div>모달 디자인 들어갈 부분</div>
+        </Modal>
+      )}
       <MyPicture>
         <Profile />
       </MyPicture>
@@ -26,8 +35,16 @@ const SetView = () => {
       </Box>
       <MiniHr />
       <Box>
-        <div>닉네임</div>
-        <button>변경하기</button>
+        <div>
+          <div>닉네임</div>
+          <button
+            onClick={() => OnOffModal(modalOpen, setModalOpen)}
+            style={{ margin: "5px 0 0 5px" }}
+          >
+            변경하기
+          </button>
+        </div>
+        <span>이름 자리</span>
       </Box>
       <Hr />
       <Box>

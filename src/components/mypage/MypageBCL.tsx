@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { mypagelike, mypagenolike, nobookmark } from "../../asset/pic";
+import { detaillike, detailnolike, nobookmark } from "../../asset/pic";
 import { MypageProps } from "../../models/MypageType";
 import ListBox from "../common(공통컴포넌트)/ListBox";
 
@@ -41,7 +41,7 @@ const MypageBookMark: React.FC<MypageProps> = ({
               <RowDiv>
                 <h4>닉네임</h4>
                 <img
-                  src={likeCheck ? mypagelike : mypagenolike}
+                  src={likeCheck ? detaillike : detailnolike}
                   alt="별"
                   onClick={() => setLikeCheck(!likeCheck)}
                 />
@@ -51,7 +51,7 @@ const MypageBookMark: React.FC<MypageProps> = ({
                   다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의
                   답변
                 </h6>
-                <p>좋아요10</p>
+                <p>좋아요 10</p>
               </RowDiv2>
             </CommentLike>
           ) : (

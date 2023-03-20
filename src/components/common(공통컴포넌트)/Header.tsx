@@ -75,7 +75,7 @@ const HeaderDiv = styled.div`
 
 const HeaderDiv2 = styled.div`
   width: 100%;
-  padding: 13% 0 0;
+  padding: 10% 0 0;
   background-color: ${(props) => props.theme.color.mypageBackGround};
   span {
     width: 100%;
