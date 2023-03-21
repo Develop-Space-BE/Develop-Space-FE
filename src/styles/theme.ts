@@ -4,6 +4,8 @@ export const color = {
   bookmarkPurple: "#ADA2D7", //rgba(173,162,215,1)
   listWhite: "#ECECEC", //rgba(236,236,236,1)
   mypageBackGround: "#F2F2F2", //rgba(242,242,242,1)
+  Gray: "#A6A6AD",
+  Grey: "#999999"
 };
 
 const theme = {

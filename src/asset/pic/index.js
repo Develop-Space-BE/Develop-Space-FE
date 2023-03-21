@@ -21,4 +21,8 @@ export { default as mainLogo } from "./mainLogo.svg";
 export { default as rightArrow } from "./rightArrow.svg";
 export { default as leftArrow } from "./leftArrow.svg";
 export { default as back } from "./back.svg";
+export { default as logo } from "./Logo.svg"; 
+export { default as backGround } from "./Background.svg"
+export {default as kakao } from "./kakao.svg"
+export {default as google} from "./google.svg"
 // export {default as } from ""
