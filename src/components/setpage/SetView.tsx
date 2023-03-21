@@ -30,8 +30,8 @@ const SetView = () => {
       </Box>
       <MiniHr />
       <Box>
-        <div>생년월일</div>
-        <span>96년도</span>
+        <div>이메일</div>
+        <span>123@naver.com</span>
       </Box>
       <MiniHr />
       <Box>
