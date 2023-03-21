@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import MainList from "./pages/MainList";
 import Mypage from "./pages/Mypage";
 import Setting from "./pages/Setting";
+import AdminPage from "./pages/AdminPage";
+import LoginPage from "./pages/LoginPage";
+import Question from "./pages/Question";
 
 const Router = () => {
   return (
@@ -13,6 +16,9 @@ const Router = () => {
         <Route path="/mainlist" element={<MainList />} />
         <Route path="/mypage/:nickname" element={<Mypage />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/adminLogin" element={<LoginPage />} />
+        <Route path="/adminPage" element={<AdminPage />} />
+        <Route path="/questionWrite" element={<Question />} />
       </Routes>
     </BrowserRouter>
   );

@@ -9,31 +9,23 @@ const MypageChart = () => {
         startAngle: 0,
         endAngle: 360,
         hollow: {
-          margin: 10,
+          margin: 1,
           size: "40%",
           background: "#fff",
-          image: undefined,
-          imageOffsetX: 0,
-          imageOffsetY: 0,
-          // position: "front",
           dropShadow: {
-            enabled: true,
-            top: 3,
-            left: 0,
-            blur: 4,
-            opacity: 0.24,
+            enabled: false,
           },
         },
         track: {
-          background: "#fff",
-          strokeWidth: "67%",
-          margin: 5, // margin is in pixels
+          background: "rgba(242, 242, 242, 1)",
+          strokeWidth: "100%",
+          margin: 10, // margin is in pixels
           dropShadow: {
             enabled: true,
-            top: -3,
+            top: 0,
             left: 0,
-            blur: 4,
-            opacity: 0.35,
+            blur: 0,
+            opacity: 1,
           },
         },
         dataLabels: {
@@ -94,24 +86,28 @@ const MypageChart = () => {
     legend: {
       show: true,
       floating: true,
-      fontSize: "10px",
-      // position: "left",
-      offsetX: 200,
-      offsetY: 100,
+      showForSingleSeries: false,
+      fontSize: "15px",
+      position: "right" as "right",
+      horizontalAlign: "center" as "center",
+      offsetX: 50,
+      offsetY: 115,
       labels: {
-        useSeriesColors: true,
+        useSeriesColors: false,
       },
       // markers: {
       //   size: 0,
       // },
       formatter: function (seriesName: string, opts: any) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex];
+        return (
+          seriesName + ":  " + opts.w.globals.series[opts.seriesIndex] + "/10"
+        );
       },
       itemMargin: {
         horizontal: 1,
       },
     },
-    labels: ["Percent", "backend", "frontend"],
+    labels: ["Attitude", "Backend", "Frontend"],
     series: [75, 70, 33],
   };
 
