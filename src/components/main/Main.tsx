@@ -1,14 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import { backGround, google, kakao, logo } from "../../asset/pic";
+import {
+  backGround,
+  backGroundWebP,
+  google,
+  kakao,
+  logo,
+  logowebp,
+} from "../../asset/pic";
 
 const Main = () => {
   return (
     <>
-      <Back src={backGround} alt="백그라운드" />
+      <picture>
+        <source srcSet={backGroundWebP} type="image/webp" />
+        <Back src={backGround} alt="백그라운드" />
+      </picture>
       <MainBox>
         <Logo>
-          <img src={logo} alt="우주복" />
+          <picture>
+            <source srcSet={logowebp} type="image/webp" />
+            <img src={logo} alt="우주복" />
+          </picture>
         </Logo>
         <Kakao>
           <img src={kakao} alt="카카오" />
