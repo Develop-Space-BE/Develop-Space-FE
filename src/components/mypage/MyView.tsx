@@ -38,43 +38,19 @@ const MyView = () => {
         <Profile />
         <h3>뭘보노</h3>
         <ImgTag>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(true, false, false, false)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(true, false, false, false)}>
             <img src={chartP ? chart : nochart} alt="차트" />
           </ImgAndDiv>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(false, true, false, false)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(false, true, false, false)}>
             <img
               src={bookmarkP ? mypagebookmark : mypagenobookmark}
               alt="북마크"
             />
           </ImgAndDiv>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(false, false, true, false)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(false, false, true, false)}>
             <img src={commentP ? comment : nocomment} alt="댓글" />
           </ImgAndDiv>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(false, false, false, true)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(false, false, false, true)}>
             <img src={likeP ? mypagelike : mypagenolike} alt="좋아요" />
           </ImgAndDiv>
         </ImgTag>
@@ -124,12 +100,7 @@ const ImgTag = styled.div`
   align-items: flex-end;
 `;
 
-const ImgAndDiv = styled.div<{
-  chartP: boolean;
-  commentP: boolean;
-  bookmarkP: boolean;
-  likeP: boolean;
-}>`
+const ImgAndDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
