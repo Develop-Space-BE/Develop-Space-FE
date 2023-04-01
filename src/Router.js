@@ -7,6 +7,7 @@ import Setting from "./pages/Setting";
 import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import Question from "./pages/Question";
+import KakaoLogin from "./components/main/KakaoLogin";
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
         <Route path="/adminLogin" element={<LoginPage />} />
         <Route path="/adminPage" element={<AdminPage />} />
         <Route path="/questionWrite" element={<Question />} />
+        <Route path="/login/kakao" element={<KakaoLogin />} />
       </Routes>
     </BrowserRouter>
   );
