@@ -30,4 +30,10 @@ export { default as spring } from "./spring.svg";
 export { default as nospring } from "./nospring.svg";
 export { default as node } from "./node.svg";
 export { default as nonode } from "./nonode.svg";
+export { default as logo } from "./logo.png";
+export { default as logowebp } from "./logo.webp";
+export { default as backGround } from "./BackGround.jpg";
+export { default as backGroundWebP } from "./BackGround.webp";
+export { default as kakao } from "./kakao.svg";
+export { default as google } from "./google.svg";
 // export {default as } from ""

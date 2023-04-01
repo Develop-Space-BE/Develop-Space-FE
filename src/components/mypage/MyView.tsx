@@ -38,48 +38,20 @@ const MyView = () => {
         <Profile />
         <h3>뭘보노</h3>
         <ImgTag>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(true, false, false, false)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(true, false, false, false)}>
             <img src={chartP ? chart : nochart} alt="차트" />
-            <h6 className="chart">진도율</h6>
           </ImgAndDiv>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(false, true, false, false)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(false, true, false, false)}>
             <img
               src={bookmarkP ? mypagebookmark : mypagenobookmark}
               alt="북마크"
             />
-            <h6 className="bookmark">북마크</h6>
           </ImgAndDiv>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(false, false, true, false)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(false, false, true, false)}>
             <img src={commentP ? comment : nocomment} alt="댓글" />
-            <h6 className="comment">내 답변 10</h6>
           </ImgAndDiv>
-          <ImgAndDiv
-            bookmarkP={bookmarkP}
-            chartP={chartP}
-            commentP={commentP}
-            likeP={likeP}
-            onClick={() => onClickMypage(false, false, false, true)}
-          >
+          <ImgAndDiv onClick={() => onClickMypage(false, false, false, true)}>
             <img src={likeP ? mypagelike : mypagenolike} alt="좋아요" />
-            <h6 className="like">좋아요</h6>
           </ImgAndDiv>
         </ImgTag>
       </MyPicture>
@@ -112,7 +84,6 @@ const MyPicture = styled.div`
   width: 100%;
   padding-top: 10%;
   margin: 0 auto;
-  border-bottom: 3px solid ${(props) => props.theme.color.lightGray};
 `;
 
 const ViewBox = styled.div`
@@ -129,46 +100,9 @@ const ImgTag = styled.div`
   align-items: flex-end;
 `;
 
-const ImgAndDiv = styled.div<{
-  chartP: boolean;
-  commentP: boolean;
-  bookmarkP: boolean;
-  likeP: boolean;
-}>`
+const ImgAndDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .chart {
-    padding: 5px;
-    border-bottom: 4px solid
-      ${(props) =>
-        props.chartP
-          ? props.theme.color.bookmarkPurple
-          : props.theme.color.transparent};
-  }
-  .bookmark {
-    padding: 5px;
-    border-bottom: 4px solid
-      ${(props) =>
-        props.bookmarkP
-          ? props.theme.color.bookmarkPurple
-          : props.theme.color.transparent};
-  }
-  .comment {
-    padding: 5px;
-    border-bottom: 4px solid
-      ${(props) =>
-        props.commentP
-          ? props.theme.color.bookmarkPurple
-          : props.theme.color.transparent};
-  }
-  .like {
-    padding: 5px;
-    border-bottom: 4px solid
-      ${(props) =>
-        props.likeP
-          ? props.theme.color.bookmarkPurple
-          : props.theme.color.transparent};
-  }
 `;

@@ -6,6 +6,9 @@ export const color = {
   mypageBackGround: "#F2F2F2", //rgba(242,242,242,1)
   white: "#FFFFFF",
   transparent: "transparent", // 투명색
+  fontColor: "#777777",
+  Gray: "#A6A6AD",
+  Grey: "#999999",
 };
 
 const theme = {
