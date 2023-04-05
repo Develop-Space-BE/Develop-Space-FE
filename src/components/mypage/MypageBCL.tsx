@@ -10,6 +10,65 @@ const MypageBookMark: React.FC<MypageProps> = ({
   likeP,
 }) => {
   const [likeCheck, setLikeCheck] = useState<boolean>(false);
+
+  const datas = [
+    {
+      id: 1,
+      category: "ATTITUDE",
+      content: "1",
+    },
+    {
+      id: 2,
+      category: "ATTITUDE",
+      content: "2",
+    },
+    {
+      id: 3,
+      category: "ATTITUDE",
+      content: "3",
+    },
+    {
+      id: 4,
+      category: "ATTITUDE",
+      content: "4",
+    },
+    {
+      id: 5,
+      category: "ATTITUDE",
+      content: "5",
+    },
+    {
+      id: 6,
+      category: "ATTITUDE",
+      content: "6",
+    },
+    {
+      id: 7,
+      category: "ATTITUDE",
+      content: "7",
+    },
+    {
+      id: 8,
+      category: "ATTITUDE",
+      content: "8",
+    },
+    {
+      id: 9,
+      category: "ATTITUDE",
+      content: "9",
+    },
+    {
+      id: 10,
+      category: "ATTITUDE",
+      content: "10",
+    },
+    {
+      id: 11,
+      category: "ATTITUDE",
+      content: "11",
+    },
+  ];
+
   return (
     <BookMarkDiv>
       <h5>
@@ -17,48 +76,49 @@ const MypageBookMark: React.FC<MypageProps> = ({
         {commentP ? "내 답변(0/30)" : ""}
         {likeP ? "즐겨찾기" : ""}
       </h5>
-      <ListBox>
-        <MainList>
-          {bookmarkP ? (
-            <>
-              <MainListImg src={nobookmark} alt="북마크" />
-              <h4>Q. 질문~~~~adsadas~Q.asdsafafsf</h4>
-              <h6>키워드</h6>
-            </>
-          ) : (
-            ""
-          )}
-          {commentP ? (
-            <CommentLike>
-              <h4>Q. 질문 데이터 들어갈 자리</h4>
-              <h6>내가 입력한 댓글?내용 자리</h6>
-            </CommentLike>
-          ) : (
-            ""
-          )}
-          {likeP ? (
-            <CommentLike>
-              <RowDiv>
-                <h4>닉네임</h4>
-                <img
-                  src={likeCheck ? detaillike : detailnolike}
-                  alt="별"
-                  onClick={() => setLikeCheck(!likeCheck)}
-                />
-              </RowDiv>
-              <RowDiv2>
-                <h6>
-                  다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의
-                  답변
-                </h6>
-                <p>좋아요 10</p>
-              </RowDiv2>
-            </CommentLike>
-          ) : (
-            ""
-          )}
-        </MainList>
-      </ListBox>
+      {datas.map((data) => (
+        <ListBox>
+          <MainList>
+            {bookmarkP ? (
+              <>
+                <MainListImg src={nobookmark} alt="북마크" />
+                <h4>{data.content}</h4>
+              </>
+            ) : (
+              ""
+            )}
+            {commentP ? (
+              <CommentLike>
+                <h4>Q. 질문 데이터 들어갈 자리</h4>
+                <h6>내가 입력한 댓글?내용 자리</h6>
+              </CommentLike>
+            ) : (
+              ""
+            )}
+            {likeP ? (
+              <CommentLike>
+                <RowDiv>
+                  <h4>닉네임</h4>
+                  <img
+                    src={likeCheck ? detaillike : detailnolike}
+                    alt="별"
+                    onClick={() => setLikeCheck(!likeCheck)}
+                  />
+                </RowDiv>
+                <RowDiv2>
+                  <h6>
+                    다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의
+                    답변
+                  </h6>
+                  <p>좋아요 10</p>
+                </RowDiv2>
+              </CommentLike>
+            ) : (
+              ""
+            )}
+          </MainList>
+        </ListBox>
+      ))}
     </BookMarkDiv>
   );
 };
@@ -81,7 +141,7 @@ const BookMarkDiv = styled.div`
 
 const MainList = styled.div`
   h4 {
-    margin: -4% 5% 0;
+    margin: -2% 5% 0;
   }
   h6 {
     padding-left: 5%;
@@ -91,7 +151,7 @@ const MainList = styled.div`
 
 const MainListImg = styled.img`
   margin-left: 85%;
-  width: 16px;
+  width: 18px;
 `;
 
 const CommentLike = styled.div`
