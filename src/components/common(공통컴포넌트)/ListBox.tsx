@@ -18,4 +18,5 @@ const ListView = styled.div`
   border: 1px solid ${(props) => props.theme.color.listWhite};
   border-radius: 15px;
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+  word-wrap: break-word;
 `;

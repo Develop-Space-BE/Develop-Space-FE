@@ -259,7 +259,7 @@ const ListCheck = styled.div`
   margin: 0 auto;
   width: 75%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const Hr = styled.hr`
