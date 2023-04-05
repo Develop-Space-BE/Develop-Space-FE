@@ -9,7 +9,16 @@ import {
   logowebp,
 } from "../../asset/pic";
 
+export const kakaoKEY = process.env.REACT_APP_KAKAO_CLIENT_ID;
+export const kakaoREDIRECT = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+
 const Main = () => {
+  const KakaoLog = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoKEY}&redirect_uri=${kakaoREDIRECT}&response_type=code`;
+  const KakaoLogin = (e : React.FormEvent) => {
+    e.preventDefault()
+    window.location.href = KakaoLog
+  }
+
   return (
     <>
       <picture>
@@ -23,7 +32,7 @@ const Main = () => {
             <img src={logo} alt="우주복" />
           </picture>
         </Logo>
-        <Kakao>
+        <Kakao onClick={KakaoLogin}>
           <img src={kakao} alt="카카오" />
         </Kakao>
         <Google>

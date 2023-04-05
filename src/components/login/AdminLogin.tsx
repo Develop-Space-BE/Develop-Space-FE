@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { instanceAxios } from "../../api/apiConfig";
+import { setCookies } from "../../api/cookie";
 import { mainLogo } from "../../asset/pic";
 
 const AdminLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const postLogin = async (post: object) => {
+    try {
+      const data = await instanceAxios.post(`/member/login`, post);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //  ID: test01@test.com
+  //  PW: qwe123!@#
+
+  const onLogin = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (email === "" || password === "") {
+      alert("아이디, 비밀번호를 확인해주세요");
+    } else {
+      postLogin({ email, password }).then((res) => {
+        if (res?.data.customHttpStatus === 2000) {
+          setCookies("authorization", res.headers.authorization, {
+            path: "/",
+            maxAge: 3000,
+          });
+          navigate("/mainlist");
+        } else {
+          alert("로그인 실패");
+        }
+      });
+    }
+  };
+
   return (
     <>
       <HeaderDiv>
@@ -11,10 +50,30 @@ const AdminLogin = () => {
       <Div>
         <Admin>관리자 로그인</Admin>
         <Name>이메일</Name>
-        <Inp></Inp>
+        <Inp
+          name="adminEmail"
+          type="text"
+          onChange={(e) => {
+            const { value } = e.target;
+            setEmail(value);
+          }}
+        />
         <Name>비밀번호</Name>
-        <Inp></Inp>
-        <LoginBtn>다음</LoginBtn>
+        <Inp
+          name="password"
+          type="password"
+          onChange={(e) => {
+            const { value } = e.target;
+            setPassword(value);
+          }}
+        />
+        <LoginBtn
+          onClick={(e) => {
+            onLogin(e);
+          }}
+        >
+          다음
+        </LoginBtn>
       </Div>
     </>
   );
