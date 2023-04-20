@@ -16,6 +16,7 @@ const initialState = {
   error: null,
 } as MListState;
 
+// 메인 대분류/질문 조회 swager / Question 부분
 export const __getMainList = createAsyncThunk(
   "__getMainList",
   async (payload: string, thunkAPI) => {
@@ -31,6 +32,7 @@ export const __getMainList = createAsyncThunk(
   }
 );
 
+// 메인 소분류/질문 조회 swager / Question 부분
 export const __getMainSubList = createAsyncThunk(
   "__getMainSubList",
   async (payload: string, thunkAPI) => {
@@ -46,6 +48,7 @@ export const __getMainSubList = createAsyncThunk(
   }
 );
 
+// 북마크 swager / Question 부분
 export const __postBookMark = createAsyncThunk(
   "__postBookMark",
   async (payload: string | number, thunkAPI) => {

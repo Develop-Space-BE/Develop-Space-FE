@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { bview } from "../asset/pic";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -26,8 +27,28 @@ const GlobalStyle = createGlobalStyle`
   }
   html, body{
     font-family: "Noto Sans KR" ,sans-serif;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    background-image: url(${bview});
+    /* background-repeat: no-repeat;  */
+    background-size: auto;
+    // pc 화면
+    @media screen and (min-width:1024px) {
+      width: 390px;
+      height: 100vh;
+      margin: 0 auto;
+    }
+    // 태블릿 화면
+    @media screen and (max-width:1023px) {
+      width: 390px;
+      height: 100vh;
+      margin: 0 auto;
+    }
+    // 모바일 화면
+    @media screen and (max-width:540px){
+      width: 100vw;
+      height: 100vh;
+    }
   }
 `;
 

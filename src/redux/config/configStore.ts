@@ -7,9 +7,11 @@ import {
 } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import mainList from "../modules/mainList";
+import myPageSet from "../modules/myPageSet";
 
 const rootReducer = combineReducers({
   mainList,
+  myPageSet,
 });
 
 // 사용자 지정 AppStore로 스토어 생성

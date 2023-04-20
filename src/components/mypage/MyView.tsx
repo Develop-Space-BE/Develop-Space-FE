@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   chart,
@@ -10,12 +10,15 @@ import {
   mypagebookmark,
   mypagelike,
 } from "../../asset/pic";
+import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
+import { User, __getUser } from "../../redux/modules/myPageSet";
 import Hr from "../common(공통컴포넌트)/Hr";
 import Profile from "../common(공통컴포넌트)/Profile";
 import MypageBCL from "./MypageBCL";
 import MypageChart from "./MypageChart";
 
 const MyView = () => {
+  const dispatch = useAppDispatch();
   const [chartP, setChartP] = useState<boolean>(true);
   const [bookmarkP, setBookmarkP] = useState<boolean>(false);
   const [commentP, setCommentP] = useState<boolean>(false);
@@ -31,12 +34,19 @@ const MyView = () => {
     setCommentP(cm);
     setLikeP(lk);
   };
+
+  useEffect(() => {
+    dispatch(__getUser());
+  }, [dispatch]);
+
+  const user = useAppSelector(User);
+  console.log(user);
   return (
     <MyViewAll>
       {/* <Hr /> */}
       <MyPicture>
         <Profile />
-        <h3>뭘보노</h3>
+        <h3>{user.nickname}</h3>
         <ImgTag>
           <ImgAndDiv onClick={() => onClickMypage(true, false, false, false)}>
             <img src={chartP ? chart : nochart} alt="차트" />
@@ -81,6 +91,7 @@ const MyViewAll = styled.div`
 `;
 
 const MyPicture = styled.div`
+  background-color: ${(props) => props.theme.color.white};
   width: 100%;
   padding-top: 10%;
   margin: 0 auto;

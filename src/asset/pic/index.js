@@ -38,6 +38,7 @@ export { default as kakao } from "./kakao.svg";
 export { default as google } from "./google.svg";
 export { default as all } from "./All.svg";
 export { default as noAll } from "./noAll.svg";
+export { default as bview } from "./111.jpeg";
 export { default as mycomment } from "./mycomment.svg";
 export { default as differntcomment } from "./differntcomment.svg";
 export { default as nomycomment } from "./nomycomment.svg";

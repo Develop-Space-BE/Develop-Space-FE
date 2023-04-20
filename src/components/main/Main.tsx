@@ -1,30 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {
-  backGround,
-  backGroundWebP,
-  google,
-  kakao,
-  logo,
-  logowebp,
-} from "../../asset/pic";
+import { google, kakao, logo, logowebp } from "../../asset/pic";
 
 export const kakaoKEY = process.env.REACT_APP_KAKAO_CLIENT_ID;
 export const kakaoREDIRECT = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 
 const Main = () => {
+  const navigate = useNavigate();
   const KakaoLog = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoKEY}&redirect_uri=${kakaoREDIRECT}&response_type=code`;
-  const KakaoLogin = (e : React.FormEvent) => {
-    e.preventDefault()
-    window.location.href = KakaoLog
-  }
+  const KakaoLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    window.location.href = KakaoLog;
+  };
 
   return (
     <>
-      <picture>
-        <source srcSet={backGroundWebP} type="image/webp" />
-        <Back src={backGround} alt="백그라운드" />
-      </picture>
       <MainBox>
         <Logo>
           <picture>
@@ -35,10 +26,10 @@ const Main = () => {
         <Kakao onClick={KakaoLogin}>
           <img src={kakao} alt="카카오" />
         </Kakao>
-        <Google>
+        {/* <Google>
           <img src={google} alt="구글" />
-        </Google>
-        <Admin>관리자 로그인</Admin>
+        </Google> */}
+        <Admin onClick={() => navigate("/adminLogin")}>관리자 로그인</Admin>
       </MainBox>
     </>
   );
@@ -47,6 +38,8 @@ const Main = () => {
 export default Main;
 
 const MainBox = styled.div`
+  width: 100%;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,13 +50,13 @@ const Logo = styled.div`
   width: 233px;
   height: 134px;
   margin-top: 235px;
-  position: relative;
+  /* position: relative; */
 `;
 
 const Back = styled.img`
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  /* width: 100%;
+  height: 100%; */
+  /* position: absolute; */
 `;
 
 const Kakao = styled.button`
