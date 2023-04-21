@@ -14,6 +14,7 @@ const KakaoLogin = () => {
       navigate("/mainlist");
     } else {
       alert("로그인 실패");
+      navigate("/");
     }
   });
 };

@@ -1,11 +1,12 @@
 import React from "react";
 import Detail from "../components/detail/Detail";
+import { Contain } from "./Home";
 
 const DetailPage = () => {
   return (
-    <div>
+    <Contain>
       <Detail />
-    </div>
+    </Contain>
   );
 };
 

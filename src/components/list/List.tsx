@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useIntersectionObserver from "../../\bhook/infinity";
 import {
@@ -20,8 +20,13 @@ import {
   vue,
 } from "../../asset/pic";
 import { MList } from "../../models/MainpageType";
-import { useAppDispatch } from "../../redux/config/configStore";
-import { __getMainList, __getMainSubList } from "../../redux/modules/mainList";
+import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
+import {
+  MoList,
+  SoList,
+  __getMainList,
+  __getMainSubList,
+} from "../../redux/modules/mainList";
 import ListBox from "../common(공통컴포넌트)/ListBox";
 import ListIn from "./ListIn";
 
@@ -37,67 +42,14 @@ const List = () => {
   const [frontAll, setFrontAll] = useState<boolean>(true);
   const [backAll, setBackAll] = useState<boolean>(true);
 
-  const datas = [
-    {
-      id: 1,
-      category: "ATTITUDE",
-      content: "1",
-    },
-    {
-      id: 2,
-      category: "ATTITUDE",
-      content: "2",
-    },
-    {
-      id: 3,
-      category: "ATTITUDE",
-      content: "3",
-    },
-    {
-      id: 4,
-      category: "ATTITUDE",
-      content: "4",
-    },
-    {
-      id: 5,
-      category: "ATTITUDE",
-      content: "5",
-    },
-    {
-      id: 6,
-      category: "ATTITUDE",
-      content: "6",
-    },
-    {
-      id: 7,
-      category: "ATTITUDE",
-      content: "7",
-    },
-    {
-      id: 8,
-      category: "ATTITUDE",
-      content: "8",
-    },
-    {
-      id: 9,
-      category: "ATTITUDE",
-      content: "9",
-    },
-    {
-      id: 10,
-      category: "ATTITUDE",
-      content: "10",
-    },
-    {
-      id: 11,
-      category: "ATTITUDE",
-      content: "11",
-    },
-  ];
+  const Main = useAppSelector(MoList);
+  const SubMain = useAppSelector(SoList);
+  console.log(SubMain);
+  console.log(Main);
 
-  const [data, setData] = useState<MList[]>(datas.slice(0, 6));
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [itemIndex, setItemIndex] = useState<number>(6);
+  useEffect(() => {
+    dispatch(__getMainList("ATTITUDE"));
+  }, [dispatch]);
 
   // 대 분류 클릭시 공통, 프론트, 백엔드
   const onClickBigList = (at: boolean, fe: boolean, be: boolean): void => {
@@ -138,35 +90,6 @@ const List = () => {
       dispatch(__getMainSubList("NODE"));
     }
   };
-
-  const testFetch = (delay = 1000) =>
-    new Promise((res) => setTimeout(res, delay));
-
-  const getMoreItem = async () => {
-    setIsLoaded(true);
-    await testFetch();
-    setItemIndex((i) => i + 1);
-    setData(data.concat(datas.slice(itemIndex, itemIndex + 2)));
-    setIsLoaded(false);
-  };
-
-  const onIntersect: IntersectionObserverCallback = async (
-    [entry],
-    observer
-  ) => {
-    if (entry.isIntersecting && !isLoaded) {
-      observer.unobserve(entry.target);
-      await getMoreItem();
-      observer.observe(entry.target);
-    }
-  };
-
-  const { setTarget } = useIntersectionObserver({
-    root: null,
-    rootMargin: "10px",
-    threshold: 0.9,
-    onIntersect,
-  });
 
   return (
     <div>
@@ -232,12 +155,25 @@ const List = () => {
         )}
       </ListCheck>
       {frontEnds || backEnds ? <Hr /> : ""}
-      {data.map((data, index) => (
-        <ListBox key={index}>
-          <ListIn data={data} />
-        </ListBox>
-      ))}
-      <div ref={setTarget}>{isLoaded && <div>Loding...</div>}</div>
+      <>
+        {attitudes || frontEnds || backEnds === true
+          ? Main.map((data, index) => (
+              <ListBox key={index}>
+                <ListIn data={data} />
+              </ListBox>
+            ))
+          : ""}
+        {(frontEnds && reactView) ||
+        (frontEnds && vueView) ||
+        (backEnds && springView) ||
+        (backEnds && nodeView) === true
+          ? SubMain.map((data, index) => (
+              <ListBox key={index}>
+                <ListIn data={data} />
+              </ListBox>
+            ))
+          : ""}
+      </>
     </div>
   );
 };
