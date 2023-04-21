@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../../api/apiConfig";
 import { MList, MSList } from "../../models/MainpageType";
+import { RootState } from "../config/configStore";
 
 export interface MListState {
   mainList: MList[];
@@ -16,6 +17,9 @@ const initialState = {
   error: null,
 } as MListState;
 
+export const MoList = (state: RootState) => state.mainList.mainList;
+export const SoList = (state: RootState) => state.mainList.mainSubList;
+
 // 메인 대분류/질문 조회 swager / Question 부분
 export const __getMainList = createAsyncThunk(
   "__getMainList",
@@ -24,8 +28,7 @@ export const __getMainList = createAsyncThunk(
       const {
         data: { data },
       } = await instanceAxios.get(`question/category/${payload}`);
-      console.log(data);
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -41,7 +44,7 @@ export const __getMainSubList = createAsyncThunk(
         data: { data },
       } = await instanceAxios.get(`question/subcategory/${payload}`);
       console.log("sub", data);
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
