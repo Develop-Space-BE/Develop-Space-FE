@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import useIntersectionObserver from "../../\bhook/infinity";
 import {
   all,
   attitude,
@@ -19,7 +19,6 @@ import {
   spring,
   vue,
 } from "../../asset/pic";
-import { MList } from "../../models/MainpageType";
 import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
 import {
   MoList,
@@ -44,8 +43,6 @@ const List = () => {
 
   const Main = useAppSelector(MoList);
   const SubMain = useAppSelector(SoList);
-  console.log(SubMain);
-  console.log(Main);
 
   useEffect(() => {
     dispatch(__getMainList("ATTITUDE"));
@@ -156,22 +153,22 @@ const List = () => {
       </ListCheck>
       {frontEnds || backEnds ? <Hr /> : ""}
       <>
+        {/* 처음은 큰분류로 나누고 그이후는 소분류로 데이터 받아오게 만듬 */}
         {attitudes || frontEnds || backEnds === true
-          ? Main.map((data, index) => (
-              <ListBox key={index}>
-                <ListIn data={data} />
-              </ListBox>
-            ))
-          : ""}
-        {(frontEnds && reactView) ||
-        (frontEnds && vueView) ||
-        (backEnds && springView) ||
-        (backEnds && nodeView) === true
-          ? SubMain.map((data, index) => (
-              <ListBox key={index}>
-                <ListIn data={data} />
-              </ListBox>
-            ))
+          ? (frontEnds && reactView) ||
+            (frontEnds && vueView) ||
+            (backEnds && springView) ||
+            (backEnds && nodeView) === true
+            ? SubMain.map((data, index) => (
+                <ListBox key={index}>
+                  <ListIn data={data} />
+                </ListBox>
+              ))
+            : Main.map((data, index) => (
+                <ListBox key={index}>
+                  <ListIn data={data} />
+                </ListBox>
+              ))
           : ""}
       </>
     </div>
