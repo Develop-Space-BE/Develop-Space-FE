@@ -1,10 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 type Props = {
   children: React.ReactNode;
 };
-
 const ListBox: React.FC<Props> = ({ children }) => {
   return <ListView>{children}</ListView>;
 };
