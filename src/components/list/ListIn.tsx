@@ -10,11 +10,10 @@ const ListIn = ({ data }: { data: MList }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [BMark, setBMark] = useState<boolean>(false);
-
   const dataID: string | number = data.id;
-  const onClickDetailPage = (e: MouseEvent) => {
-    e.preventDefault();
-    navigate(`/detail/${dataID}`);
+
+  const onClickDetailPage = () => {
+    navigate(`/detail/${data.subcategory}/${dataID}`);
   };
 
   const onClickBookmark = () => {
@@ -23,29 +22,38 @@ const ListIn = ({ data }: { data: MList }) => {
   };
 
   return (
-    <MainList onClick={onClickDetailPage}>
+    <BoxView>
+      <MainList onClick={onClickDetailPage}>
+        <div>{data?.content}</div>
+      </MainList>
       <img
         src={BMark ? bookmark : nobookmark}
         alt="북마크"
         onClick={onClickBookmark}
       />
-      <div>{data?.content}</div>
-    </MainList>
+    </BoxView>
   );
 };
 
 export default ListIn;
 
-const MainList = styled.div`
-  border: 1px solid red;
+const BoxView = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
   img {
     margin-left: 88%;
     width: 20px;
-    z-index: 100;
+    position: absolute;
+    top: 0;
   }
+`;
+
+const MainList = styled.div`
+  width: 100%;
+  height: 100%;
   div {
+    padding-top: 6%;
     margin: 0 10%;
   }
 `;

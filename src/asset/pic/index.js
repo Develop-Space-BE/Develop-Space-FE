@@ -43,4 +43,11 @@ export { default as mycomment } from "./mycomment.svg";
 export { default as differntcomment } from "./differntcomment.svg";
 export { default as nomycomment } from "./nomycomment.svg";
 export { default as nodifferntcomment } from "./nodifferntcomment.svg";
+export { default as headAttitude } from "./HeadAttitude.svg";
+export { default as headNodejs } from "./HeadNodejs.svg";
+export { default as headReact } from "./HeadReact.svg";
+export { default as headSpring } from "./HeadSpring.svg";
+export { default as headVue } from "./HeadVue.svg";
+export { default as save } from "./Save.svg";
+export { default as cancel } from "./Cancel.svg";
 // export {default as } from ""

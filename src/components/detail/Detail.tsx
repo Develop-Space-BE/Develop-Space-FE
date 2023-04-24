@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import { string } from "prop-types";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import {
   bookmark,
+  cancel,
   differntcomment,
   leftArrow,
   mycomment,
@@ -9,16 +12,31 @@ import {
   nodifferntcomment,
   nomycomment,
   rightArrow,
+  save,
 } from "../../asset/pic";
+import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
+import { MyAnswer, __getMyAnswer } from "../../redux/modules/detailAnswer";
+import { SoList, __getMainSubList } from "../../redux/modules/mainList";
 import Header from "../common(공통컴포넌트)/Header";
 import ListBox from "../common(공통컴포넌트)/ListBox";
-//import Hr from "../common(공통컴포넌트)/Hr";
 
 const Detail = () => {
+  const dispatch = useAppDispatch();
+  const [textData, setTextData] = useState<string>("");
   const [BookMark, setBookMark] = useState<boolean>(false);
   const [Mycomment, setMyComment] = useState<boolean>(true);
   const [DifferntComment, setDifferntComment] = useState<boolean>(false);
+  const { id } = useParams();
 
+  useEffect(() => {
+    dispatch(__getMyAnswer(`${id}`));
+  }, [dispatch]);
+
+  const MineAnswer = useAppSelector(MyAnswer);
+  console.log(MineAnswer);
+
+  const a = useAppSelector((state) => state.mainList.mainList);
+  console.log(a);
   const onClickBookmark2 = () => {
     setBookMark(!BookMark);
   };
@@ -31,12 +49,17 @@ const Detail = () => {
     setDifferntComment(true);
     setMyComment(false);
   };
+
+  const onChangeDetailData = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextData(e.target.value);
+    console.log(textData);
+  };
   return (
     <>
       <Header />
       <MinHead>
         <img src={leftArrow} alt="이전 질문" />
-        <h3>Question #1</h3>
+        <h3>Question #{id}</h3>
         <img src={rightArrow} alt="다음 질문" />
       </MinHead>
       <ListBox>
@@ -62,16 +85,17 @@ const Detail = () => {
         />
       </CommentsBox>
       <hr />
-
-      <QuestionBox
-        placeholder="입력하기 (500자 이내)"
-        maxLength={500}
-        //onChange={}
-      ></QuestionBox>
-      <ButtonBox>
-        <Cancle>취소</Cancle>
-        <Save>저장</Save>
-      </ButtonBox>
+      <div>
+        <QuestionBox
+          placeholder="입력하기 (500자 이내)"
+          maxLength={500}
+          onChange={onChangeDetailData}
+        />
+        <ButtonBox>
+          <img src={cancel} alt="취소" />
+          <img src={save} alt="저장" />
+        </ButtonBox>
+      </div>
     </>
   );
 };
@@ -106,33 +130,23 @@ const CommentsBox = styled.div`
 `;
 
 const QuestionBox = styled.textarea`
-  width: 290px;
-  height: 264px;
+  width: 90%;
+  height: 40vh;
   display: flex;
-  margin: 30px auto 30px auto;
+  margin: 20px auto;
+  padding: 20px;
   border: 1px solid #ececec;
+  border-radius: 10px;
   word-wrap: break-word;
   word-break: break-word;
 `;
 
 const ButtonBox = styled.div`
+  width: 90%;
+  margin: 0 5%;
   display: flex;
-  float: right;
-`;
-
-const Cancle = styled.button`
-  width: 70px;
-  height: 30px;
-  margin-right: 30px;
-  border-radius: 10px;
-  background-color: #777777;
-  color: #ffffff;
-`;
-
-const Save = styled.button`
-  width: 70px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: #111111;
-  color: #ffff;
+  justify-content: end;
+  img {
+    margin-left: 5%;
+  }
 `;

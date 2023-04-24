@@ -22,7 +22,7 @@ const Router = () => {
         <Route path="/adminPage" element={<AdminPage />} />
         <Route path="/questionWrite" element={<Question />} />
         <Route path="/login/kakao" element={<KakaoLogin />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/detail/:title/:id" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );
