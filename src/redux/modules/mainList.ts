@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../../api/apiConfig";
-import { MList, MSList } from "../../models/MainpageType";
+import { MList } from "../../models/MainpageType";
 import { RootState } from "../config/configStore";
 
 export interface MListState {
   mainList: MList[];
-  mainSubList: MSList[];
+  mainSubList: MList[];
   isLoding: boolean;
   error: unknown;
 }
 
 const initialState = {
   mainList: [] as MList[],
-  mainSubList: [] as MSList[],
+  mainSubList: [] as MList[],
   isLoding: false,
   error: null,
 } as MListState;
