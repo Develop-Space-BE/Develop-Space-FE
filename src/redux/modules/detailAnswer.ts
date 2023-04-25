@@ -1,28 +1,65 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instanceAxios } from "../../api/apiConfig";
+import { DetailData, MAW } from "../../models/Detail";
 import { RootState } from "../config/configStore";
 
 export interface DetailView {
-  MAnswer: {};
+  MAnswer: DetailData[];
+  OAnswer: [];
   isLoding: boolean;
   error: unknown;
 }
 
 const initialState = {
-  MAnswer: {},
+  MAnswer: [],
+  OAnswer: [],
   isLoding: false,
   error: null,
 } as DetailView;
 
 export const MyAnswer = (state: RootState) => state.detailBox.MAnswer;
+export const OtherAnswer = (state: RootState) => state.detailBox.OAnswer;
 
+// 내답변 조회
 export const __getMyAnswer = createAsyncThunk(
   "getMyAnswer",
   async (payload: number | string, thunkAPI) => {
     try {
-      const { data } = await instanceAxios(`answer/${payload}`);
+      const {
+        data: { data },
+      } = await instanceAxios.get(`answer/${payload}`);
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getOtherAnswer = createAsyncThunk(
+  "getOtherAnswer",
+  async (payload: number | string, thunkAPI) => {
+    try {
+      const {
+        data: { data },
+      } = await instanceAxios.get(`answer/other/${payload}`);
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// 답변 작성
+export const __postMyAnswer = createAsyncThunk(
+  "postMyAnswer",
+  async (payload: MAW, thunkAPI) => {
+    try {
+      const { data } = await instanceAxios.post(`answer/${payload.id}`, {
+        answer: payload.answer,
+      });
+      console.log(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -42,6 +79,16 @@ export const DetailBox = createSlice({
         state.MAnswer = payload;
       })
       .addCase(__getMyAnswer.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoding = false;
+      })
+      .addCase(__getOtherAnswer.pending, (state) => {
+        state.isLoding = true;
+      })
+      .addCase(__getOtherAnswer.fulfilled, (state, { payload }) => {
+        state.OAnswer = payload;
+      })
+      .addCase(__getOtherAnswer.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoding = false;
       });
