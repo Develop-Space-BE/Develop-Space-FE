@@ -5,6 +5,8 @@ import styled from "styled-components";
 import {
   bookmark,
   cancel,
+  detaillike,
+  detailnolike,
   differntcomment,
   leftArrow,
   mycomment,
@@ -14,15 +16,29 @@ import {
   rightArrow,
   save,
 } from "../../asset/pic";
+import { DetailData } from "../../models/Detail";
 import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
-import { MyAnswer, __getMyAnswer } from "../../redux/modules/detailAnswer";
-import { SoList, __getMainSubList } from "../../redux/modules/mainList";
+import {
+  MyAnswer,
+  OtherAnswer,
+  __getMyAnswer,
+  __getOtherAnswer,
+  __postMyAnswer,
+} from "../../redux/modules/detailAnswer";
+import { __getMainSubList } from "../../redux/modules/mainList";
 import Header from "../common(공통컴포넌트)/Header";
 import ListBox from "../common(공통컴포넌트)/ListBox";
+import { MainList } from "../mypage/MypageBCL";
+import DetailOtherView from "./DetailOtherView";
 
 const Detail = () => {
   const dispatch = useAppDispatch();
-  const [textData, setTextData] = useState<string>("");
+  const MineAnswer = useAppSelector(MyAnswer);
+  const OthAnswer = useAppSelector(OtherAnswer);
+  const AData = MineAnswer[0];
+  console.log(AData);
+  console.log(OthAnswer);
+  const [answer, setAnswer] = useState<string>("");
   const [BookMark, setBookMark] = useState<boolean>(false);
   const [Mycomment, setMyComment] = useState<boolean>(true);
   const [DifferntComment, setDifferntComment] = useState<boolean>(false);
@@ -30,13 +46,9 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(__getMyAnswer(`${id}`));
-  }, [dispatch]);
+    dispatch(__getOtherAnswer(`${id}`));
+  }, [dispatch, id]);
 
-  const MineAnswer = useAppSelector(MyAnswer);
-  console.log(MineAnswer);
-
-  const a = useAppSelector((state) => state.mainList.mainList);
-  console.log(a);
   const onClickBookmark2 = () => {
     setBookMark(!BookMark);
   };
@@ -50,10 +62,10 @@ const Detail = () => {
     setMyComment(false);
   };
 
-  const onChangeDetailData = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextData(e.target.value);
-    console.log(textData);
+  const onClickSave = () => {
+    dispatch(__postMyAnswer({ id, answer }));
   };
+
   return (
     <>
       <Header />
@@ -85,17 +97,26 @@ const Detail = () => {
         />
       </CommentsBox>
       <hr />
-      <div>
-        <QuestionBox
-          placeholder="입력하기 (500자 이내)"
-          maxLength={500}
-          onChange={onChangeDetailData}
-        />
-        <ButtonBox>
-          <img src={cancel} alt="취소" />
-          <img src={save} alt="저장" />
-        </ButtonBox>
-      </div>
+      {Mycomment === true ? (
+        <div>
+          <QuestionBox
+            placeholder="입력하기 (500자 이내)"
+            maxLength={500}
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+          <ButtonBox>
+            <img src={cancel} alt="취소" />
+            <img src={save} alt="저장" onClick={onClickSave} />
+          </ButtonBox>
+        </div>
+      ) : (
+        <>
+          {OthAnswer.map((ans, index) => (
+            <DetailOtherView data={ans} key={index} />
+          ))}
+        </>
+      )}
     </>
   );
 };
@@ -110,16 +131,6 @@ const MinHead = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 30px auto 35px auto;
-`;
-
-const MainList = styled.div`
-  img {
-    margin-left: 88%;
-    width: 20px;
-  }
-  div {
-    margin: 0 10%;
-  }
 `;
 
 const CommentsBox = styled.div`

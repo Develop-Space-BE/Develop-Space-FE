@@ -139,7 +139,7 @@ const BookMarkDiv = styled.div`
   }
 `;
 
-const MainList = styled.div`
+export const MainList = styled.div`
   h4 {
     margin: -2% 5% 0;
   }
@@ -154,7 +154,7 @@ const MainListImg = styled.img`
   width: 18px;
 `;
 
-const CommentLike = styled.div`
+export const CommentLike = styled.div`
   padding-top: 7%;
   img {
     margin-top: -3%;
@@ -163,13 +163,13 @@ const CommentLike = styled.div`
   }
 `;
 
-const RowDiv = styled.div`
+export const RowDiv = styled.div`
   width: 95%;
   display: flex;
   justify-content: space-between;
 `;
 
-const RowDiv2 = styled.div`
+export const RowDiv2 = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
