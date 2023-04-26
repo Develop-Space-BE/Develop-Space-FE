@@ -1,12 +1,9 @@
-import { string } from "prop-types";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import {
   bookmark,
   cancel,
-  detaillike,
-  detailnolike,
   differntcomment,
   leftArrow,
   mycomment,
@@ -16,7 +13,6 @@ import {
   rightArrow,
   save,
 } from "../../asset/pic";
-import { DetailData } from "../../models/Detail";
 import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
 import {
   MyAnswer,
@@ -25,30 +21,39 @@ import {
   __getOtherAnswer,
   __postMyAnswer,
 } from "../../redux/modules/detailAnswer";
-import { __getMainSubList } from "../../redux/modules/mainList";
+import { SoList, __getMainSubList } from "../../redux/modules/mainList";
 import Header from "../common(공통컴포넌트)/Header";
 import ListBox from "../common(공통컴포넌트)/ListBox";
-import { MainList } from "../mypage/MypageBCL";
 import DetailOtherView from "./DetailOtherView";
 
 const Detail = () => {
   const dispatch = useAppDispatch();
-  const MineAnswer = useAppSelector(MyAnswer);
-  const OthAnswer = useAppSelector(OtherAnswer);
-  const AData = MineAnswer[0];
-  console.log(AData);
-  console.log(OthAnswer);
-  const [answer, setAnswer] = useState<string>("");
-  const [BookMark, setBookMark] = useState<boolean>(false);
-  const [Mycomment, setMyComment] = useState<boolean>(true);
-  const [DifferntComment, setDifferntComment] = useState<boolean>(false);
   const { id } = useParams();
+  const { title } = useParams();
 
   useEffect(() => {
     dispatch(__getMyAnswer(`${id}`));
     dispatch(__getOtherAnswer(`${id}`));
-  }, [dispatch, id]);
+    dispatch(__getMainSubList(`${title}`));
+  }, [dispatch, id, title]);
 
+  const MineAnswer = useAppSelector(MyAnswer)[0];
+  const OthAnswer = useAppSelector(OtherAnswer);
+  const QuestionTitle = useAppSelector(SoList).filter((x) => x.id == id)[0];
+
+  console.log(MineAnswer);
+
+  var [answer, setAnswer] = useState<string>("");
+  const [BookMark, setBookMark] = useState<boolean>(false);
+  const [Mycomment, setMyComment] = useState<boolean>(true);
+  const [DifferntComment, setDifferntComment] = useState<boolean>(false);
+  if (QuestionTitle === undefined) {
+    return QuestionTitle;
+  }
+  if (MineAnswer === undefined) {
+    return MineAnswer;
+  }
+  var A = MineAnswer.answer;
   const onClickBookmark2 = () => {
     setBookMark(!BookMark);
   };
@@ -75,14 +80,14 @@ const Detail = () => {
         <img src={rightArrow} alt="다음 질문" />
       </MinHead>
       <ListBox>
-        <MainList>
+        <MListBox>
           <img
             src={BookMark ? bookmark : nobookmark}
             alt="북마크"
             onClick={() => onClickBookmark2()}
           />
-          <div>Q. 질문이다 임마</div>
-        </MainList>
+          <div>Q. {QuestionTitle.content}</div>
+        </MListBox>
       </ListBox>
       <CommentsBox>
         <img
@@ -131,6 +136,18 @@ const MinHead = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 30px auto 35px auto;
+`;
+
+const MListBox = styled.div`
+  width: 100%;
+  height: 100%;
+  img {
+    margin-left: 88%;
+    width: 20px;
+  }
+  div {
+    margin: 0 10%;
+  }
 `;
 
 const CommentsBox = styled.div`

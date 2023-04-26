@@ -5,7 +5,7 @@ import { RootState } from "../config/configStore";
 
 export interface DetailView {
   MAnswer: DetailData[];
-  OAnswer: [];
+  OAnswer: DetailData[];
   isLoding: boolean;
   error: unknown;
 }
@@ -59,6 +59,20 @@ export const __postMyAnswer = createAsyncThunk(
       const { data } = await instanceAxios.post(`answer/${payload.id}`, {
         answer: payload.answer,
       });
+      // 답변 작성 통신한거 보면 배열 여러개가 생성되는 문제점 발생
+      console.log(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// 답변 좋아요
+export const __postAnswerLike = createAsyncThunk(
+  "postAnswerLike",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await instanceAxios.post(``);
       console.log(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
