@@ -21,7 +21,11 @@ import {
   __getOtherAnswer,
   __postMyAnswer,
 } from "../../redux/modules/detailAnswer";
-import { SoList, __getMainSubList } from "../../redux/modules/mainList";
+import {
+  SoList,
+  __getMainSubList,
+  __postBookMark,
+} from "../../redux/modules/mainList";
 import Header from "../common(공통컴포넌트)/Header";
 import ListBox from "../common(공통컴포넌트)/ListBox";
 import DetailOtherView from "./DetailOtherView";
@@ -37,24 +41,22 @@ const Detail = () => {
     dispatch(__getMainSubList(`${title}`));
   }, [dispatch, id, title]);
 
+  // 내답변 가져오기
   const MineAnswer = useAppSelector(MyAnswer)[0];
+  // 다른 답변 가져오기
   const OthAnswer = useAppSelector(OtherAnswer);
+  // 답변 내용 가져오기
   const QuestionTitle = useAppSelector(SoList).filter((x) => x.id == id)[0];
-
   console.log(MineAnswer);
-
-  var [answer, setAnswer] = useState<string>("");
+  const [answer, setAnswer] = useState<string>(
+    MineAnswer === undefined ? "" : MineAnswer.answer
+  );
   const [BookMark, setBookMark] = useState<boolean>(false);
   const [Mycomment, setMyComment] = useState<boolean>(true);
   const [DifferntComment, setDifferntComment] = useState<boolean>(false);
-  if (QuestionTitle === undefined) {
-    return QuestionTitle;
-  }
-  if (MineAnswer === undefined) {
-    return MineAnswer;
-  }
-  var A = MineAnswer.answer;
+
   const onClickBookmark2 = () => {
+    dispatch(__postBookMark(id));
     setBookMark(!BookMark);
   };
 
@@ -86,7 +88,9 @@ const Detail = () => {
             alt="북마크"
             onClick={() => onClickBookmark2()}
           />
-          <div>Q. {QuestionTitle.content}</div>
+          <div>
+            Q. {QuestionTitle === undefined ? "" : QuestionTitle.content}
+          </div>
         </MListBox>
       </ListBox>
       <CommentsBox>

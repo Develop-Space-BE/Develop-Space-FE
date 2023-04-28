@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { detaillike, detailnolike } from "../../asset/pic";
 import { DetailData } from "../../models/Detail";
 import { useAppDispatch } from "../../redux/config/configStore";
+import { __postAnswerLike } from "../../redux/modules/detailAnswer";
 import ListBox from "../common(공통컴포넌트)/ListBox";
 import { CommentLike, MainList, RowDiv, RowDiv2 } from "../mypage/MypageBCL";
 
@@ -9,10 +10,9 @@ const DetailOtherView = ({ data }: { data: DetailData }) => {
   console.log(data);
   const dispatch = useAppDispatch();
   const [likeCheck, setLikeCheck] = useState<boolean>(data.liked);
-
   const onClickLike = () => {
     setLikeCheck(!likeCheck);
-    // dispatch();
+    dispatch(__postAnswerLike(data.id));
   };
   return (
     <ListBox>
