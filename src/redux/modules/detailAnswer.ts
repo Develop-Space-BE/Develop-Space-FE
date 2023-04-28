@@ -70,10 +70,12 @@ export const __postMyAnswer = createAsyncThunk(
 // 답변 좋아요
 export const __postAnswerLike = createAsyncThunk(
   "postAnswerLike",
-  async (payload, thunkAPI) => {
+  async (payload: string | number | undefined, thunkAPI) => {
     try {
-      const data = await instanceAxios.post(``);
-      console.log(data);
+      const {
+        data: { data },
+      } = await instanceAxios.post(`answer/like/${payload}`);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

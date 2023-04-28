@@ -1,6 +1,6 @@
 export interface MAW {
   id: number | string | undefined;
-  answer: string;
+  answer: string | undefined;
 }
 
 export interface DetailData {

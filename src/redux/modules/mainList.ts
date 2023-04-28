@@ -54,7 +54,7 @@ export const __getMainSubList = createAsyncThunk(
 // 북마크 swager / Question 부분
 export const __postBookMark = createAsyncThunk(
   "__postBookMark",
-  async (payload: string | number, thunkAPI) => {
+  async (payload: string | number | undefined, thunkAPI) => {
     try {
       const { data } = await instanceAxios.post(`question/bookmark/${payload}`);
       console.log(data);

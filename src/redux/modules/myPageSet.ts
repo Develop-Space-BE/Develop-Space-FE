@@ -4,7 +4,6 @@ import { Comment, UserImpormation } from "../../models/MypageType";
 import { RootState } from "../config/configStore";
 
 export interface MypageSet {
-  myLike: [];
   User: UserImpormation;
   Com: Comment[];
   isLoding: boolean;
@@ -12,7 +11,6 @@ export interface MypageSet {
 }
 
 const initialState = {
-  myLike: [],
   User: {},
   Com: [] as Comment[],
   isLoding: false,
