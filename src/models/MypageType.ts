@@ -12,6 +12,8 @@ export interface UserImpormation {
 }
 
 export interface Comment {
-  name: string;
-  email: string;
+  id: string | number;
+  nickname: string;
+  answer: string;
+  content: string;
 }
