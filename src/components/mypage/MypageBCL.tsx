@@ -1,124 +1,68 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { detaillike, detailnolike, nobookmark } from "../../asset/pic";
+import { nobookmark } from "../../asset/pic";
 import { MypageProps } from "../../models/MypageType";
+import { useAppSelector } from "../../redux/config/configStore";
+import { myAnswerData, myLikeData } from "../../redux/modules/myPageSet";
 import ListBox from "../common(공통컴포넌트)/ListBox";
+import MypageLike from "./MypageLike";
 
 const MypageBookMark: React.FC<MypageProps> = ({
   bookmarkP,
   commentP,
   likeP,
 }) => {
-  const [likeCheck, setLikeCheck] = useState<boolean>(false);
-
-  const datas = [
-    {
-      id: 1,
-      category: "ATTITUDE",
-      content: "1",
-    },
-    {
-      id: 2,
-      category: "ATTITUDE",
-      content: "2",
-    },
-    {
-      id: 3,
-      category: "ATTITUDE",
-      content: "3",
-    },
-    {
-      id: 4,
-      category: "ATTITUDE",
-      content: "4",
-    },
-    {
-      id: 5,
-      category: "ATTITUDE",
-      content: "5",
-    },
-    {
-      id: 6,
-      category: "ATTITUDE",
-      content: "6",
-    },
-    {
-      id: 7,
-      category: "ATTITUDE",
-      content: "7",
-    },
-    {
-      id: 8,
-      category: "ATTITUDE",
-      content: "8",
-    },
-    {
-      id: 9,
-      category: "ATTITUDE",
-      content: "9",
-    },
-    {
-      id: 10,
-      category: "ATTITUDE",
-      content: "10",
-    },
-    {
-      id: 11,
-      category: "ATTITUDE",
-      content: "11",
-    },
-  ];
+  const A = useAppSelector(myAnswerData);
+  const B = useAppSelector(myLikeData);
+  console.log(B);
 
   return (
     <BookMarkDiv>
       <h5>
         {bookmarkP ? "북마크" : ""}
-        {commentP ? "내 답변(0/30)" : ""}
+        {commentP ? "내 답변" : ""}
         {likeP ? "즐겨찾기" : ""}
       </h5>
-      {datas.map((data) => (
-        <ListBox>
-          <MainList>
-            {bookmarkP ? (
-              <>
+      {bookmarkP
+        ? A.map((data, index) => (
+            <ListBox key={index}>
+              <MainList>
                 <MainListImg src={nobookmark} alt="북마크" />
                 <h4>{data.content}</h4>
-              </>
-            ) : (
-              ""
-            )}
-            {commentP ? (
-              <CommentLike>
-                <h4>Q. 질문 데이터 들어갈 자리</h4>
-                <h6>내가 입력한 댓글?내용 자리</h6>
-              </CommentLike>
-            ) : (
-              ""
-            )}
-            {likeP ? (
-              <CommentLike>
-                <RowDiv>
-                  <h4>닉네임</h4>
-                  <img
-                    src={likeCheck ? detaillike : detailnolike}
-                    alt="별"
-                    onClick={() => setLikeCheck(!likeCheck)}
-                  />
-                </RowDiv>
-                <RowDiv2>
-                  <h6>
-                    다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의
-                    답변
-                  </h6>
-                  <p>좋아요 10</p>
-                </RowDiv2>
-              </CommentLike>
-            ) : (
-              ""
-            )}
-          </MainList>
-        </ListBox>
-      ))}
+              </MainList>
+            </ListBox>
+          ))
+        : ""}
+
+      {commentP
+        ? A.map((data, index) => (
+            <ListBox key={index}>
+              <MainList>
+                <CommentLike>
+                  <h4>Q. {data.content}</h4>
+                  <h6>{data.answer}</h6>
+                </CommentLike>
+              </MainList>
+            </ListBox>
+          ))
+        : ""}
+      {likeP
+        ? B.map((data, index) => (
+            <ListBox key={index}>
+              <MainList>
+                <CommentLike>
+                  <RowDiv>
+                    <MypageLike data={data} />
+                  </RowDiv>
+                  <RowDiv2>
+                    <h6>{data.answer}</h6>
+                    <p>좋아요 {data.likeCount}</p>
+                  </RowDiv2>
+                </CommentLike>
+              </MainList>
+            </ListBox>
+          ))
+        : ""}
     </BookMarkDiv>
   );
 };
@@ -127,6 +71,7 @@ export default MypageBookMark;
 
 const BookMarkDiv = styled.div`
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
