@@ -36,4 +36,18 @@ export { default as backGround } from "./BackGround.jpg";
 export { default as backGroundWebP } from "./BackGround.webp";
 export { default as kakao } from "./kakao.svg";
 export { default as google } from "./google.svg";
+export { default as all } from "./All.svg";
+export { default as noAll } from "./noAll.svg";
+export { default as bview } from "./111.jpeg";
+export { default as mycomment } from "./mycomment.svg";
+export { default as differntcomment } from "./differntcomment.svg";
+export { default as nomycomment } from "./nomycomment.svg";
+export { default as nodifferntcomment } from "./nodifferntcomment.svg";
+export { default as headAttitude } from "./HeadAttitude.svg";
+export { default as headNodejs } from "./HeadNodejs.svg";
+export { default as headReact } from "./HeadReact.svg";
+export { default as headSpring } from "./HeadSpring.svg";
+export { default as headVue } from "./HeadVue.svg";
+export { default as save } from "./Save.svg";
+export { default as cancel } from "./Cancel.svg";
 // export {default as } from ""

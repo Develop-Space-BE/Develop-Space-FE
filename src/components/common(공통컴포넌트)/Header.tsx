@@ -1,10 +1,24 @@
 import React from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { back, gear, mainLogo, spacesuit } from "../../asset/pic";
+import {
+  back,
+  gear,
+  headAttitude,
+  headNodejs,
+  headReact,
+  headSpring,
+  headVue,
+  mainLogo,
+  spacesuit,
+} from "../../asset/pic";
+import { useAppSelector } from "../../redux/config/configStore";
+import { User } from "../../redux/modules/myPageSet";
 
 const Header = () => {
   const navigate: NavigateFunction = useNavigate();
+  const UserInfo = useAppSelector(User);
+
   const url: string = window.location.pathname;
   if (url.includes("mainlist")) {
     return (
@@ -17,7 +31,7 @@ const Header = () => {
         <img
           src={spacesuit}
           alt="마이페이지 버튼"
-          onClick={() => navigate("/mypage/1")}
+          onClick={() => navigate(`/mypage/${UserInfo.nickname}`)}
         />
       </HeaderDiv>
     );
@@ -46,7 +60,7 @@ const Header = () => {
           <img
             src={back}
             alt="뒤로가기"
-            onClick={() => navigate("/mypage/1")}
+            onClick={() => navigate(`/mypage/${UserInfo.nickname}`)}
           />
           <h3>설정</h3>
           <div />
@@ -56,9 +70,26 @@ const Header = () => {
   } else {
     return (
       <HeaderDiv>
-        <img src={back} alt="뒤로가기" />
-        <img src="" alt="카테고리" />
-        <img src={spacesuit} alt="마이페이지 버튼" />
+        <img src={back} alt="뒤로가기" onClick={() => navigate("/mainlist")} />
+        <img
+          src={
+            url.includes("ATTITUDE")
+              ? headAttitude
+              : url.includes("REACT")
+              ? headReact
+              : url.includes("VUE")
+              ? headVue
+              : url.includes("SPRING")
+              ? headSpring
+              : headNodejs
+          }
+          alt="카테고리"
+        />
+        <img
+          src={spacesuit}
+          alt="마이페이지 버튼"
+          onClick={() => navigate(`/mypage/${UserInfo.nickname}`)}
+        />
       </HeaderDiv>
     );
   }

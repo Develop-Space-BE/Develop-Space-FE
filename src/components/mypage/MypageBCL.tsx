@@ -1,64 +1,68 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { detaillike, detailnolike, nobookmark } from "../../asset/pic";
+import { nobookmark } from "../../asset/pic";
 import { MypageProps } from "../../models/MypageType";
+import { useAppSelector } from "../../redux/config/configStore";
+import { myAnswerData, myLikeData } from "../../redux/modules/myPageSet";
 import ListBox from "../common(공통컴포넌트)/ListBox";
+import MypageLike from "./MypageLike";
 
 const MypageBookMark: React.FC<MypageProps> = ({
   bookmarkP,
   commentP,
   likeP,
 }) => {
-  const [likeCheck, setLikeCheck] = useState<boolean>(false);
+  const A = useAppSelector(myAnswerData);
+  const B = useAppSelector(myLikeData);
+  console.log(B);
+
   return (
     <BookMarkDiv>
       <h5>
         {bookmarkP ? "북마크" : ""}
-        {commentP ? "내 답변(0/30)" : ""}
+        {commentP ? "내 답변" : ""}
         {likeP ? "즐겨찾기" : ""}
       </h5>
-      <ListBox>
-        <MainList>
-          {bookmarkP ? (
-            <>
-              <MainListImg src={nobookmark} alt="북마크" />
-              <h4>Q. 질문~~~~adsadas~Q.asdsafafsf</h4>
-              <h6>키워드</h6>
-            </>
-          ) : (
-            ""
-          )}
-          {commentP ? (
-            <CommentLike>
-              <h4>Q. 질문 데이터 들어갈 자리</h4>
-              <h6>내가 입력한 댓글?내용 자리</h6>
-            </CommentLike>
-          ) : (
-            ""
-          )}
-          {likeP ? (
-            <CommentLike>
-              <RowDiv>
-                <h4>닉네임</h4>
-                <img
-                  src={likeCheck ? detaillike : detailnolike}
-                  alt="별"
-                  onClick={() => setLikeCheck(!likeCheck)}
-                />
-              </RowDiv>
-              <RowDiv2>
-                <h6>
-                  다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의다른사람의
-                  답변
-                </h6>
-                <p>좋아요 10</p>
-              </RowDiv2>
-            </CommentLike>
-          ) : (
-            ""
-          )}
-        </MainList>
-      </ListBox>
+      {bookmarkP
+        ? A.map((data, index) => (
+            <ListBox key={index}>
+              <MainList>
+                <MainListImg src={nobookmark} alt="북마크" />
+                <h4>{data.content}</h4>
+              </MainList>
+            </ListBox>
+          ))
+        : ""}
+
+      {commentP
+        ? A.map((data, index) => (
+            <ListBox key={index}>
+              <MainList>
+                <CommentLike>
+                  <h4>Q. {data.content}</h4>
+                  <h6>{data.answer}</h6>
+                </CommentLike>
+              </MainList>
+            </ListBox>
+          ))
+        : ""}
+      {likeP
+        ? B.map((data, index) => (
+            <ListBox key={index}>
+              <MainList>
+                <CommentLike>
+                  <RowDiv>
+                    <MypageLike data={data} />
+                  </RowDiv>
+                  <RowDiv2>
+                    <h6>{data.answer}</h6>
+                    <p>좋아요 {data.likeCount}</p>
+                  </RowDiv2>
+                </CommentLike>
+              </MainList>
+            </ListBox>
+          ))
+        : ""}
     </BookMarkDiv>
   );
 };
@@ -67,6 +71,7 @@ export default MypageBookMark;
 
 const BookMarkDiv = styled.div`
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -79,9 +84,9 @@ const BookMarkDiv = styled.div`
   }
 `;
 
-const MainList = styled.div`
+export const MainList = styled.div`
   h4 {
-    margin: -4% 5% 0;
+    margin: -2% 5% 0;
   }
   h6 {
     padding-left: 5%;
@@ -91,10 +96,10 @@ const MainList = styled.div`
 
 const MainListImg = styled.img`
   margin-left: 85%;
-  width: 16px;
+  width: 18px;
 `;
 
-const CommentLike = styled.div`
+export const CommentLike = styled.div`
   padding-top: 7%;
   img {
     margin-top: -3%;
@@ -103,13 +108,13 @@ const CommentLike = styled.div`
   }
 `;
 
-const RowDiv = styled.div`
+export const RowDiv = styled.div`
   width: 95%;
   display: flex;
   justify-content: space-between;
 `;
 
-const RowDiv2 = styled.div`
+export const RowDiv2 = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;

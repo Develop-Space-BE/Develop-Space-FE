@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { instanceAxios } from "../../api/apiConfig";
 import { setCookies } from "../../api/cookie";
 import { mainLogo } from "../../asset/pic";
+import { Contain } from "../../pages/Home";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <>
+    <Contain>
       <HeaderDiv>
         <img src={mainLogo} alt="메인로고" />
       </HeaderDiv>
@@ -75,7 +76,7 @@ const AdminLogin = () => {
           다음
         </LoginBtn>
       </Div>
-    </>
+    </Contain>
   );
 };
 
