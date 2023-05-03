@@ -47,10 +47,10 @@ const Detail = () => {
   const OthAnswer = useAppSelector(OtherAnswer);
   // 답변 내용 가져오기
   const QuestionTitle = useAppSelector(SoList).filter((x) => x.id == id)[0];
-  console.log(MineAnswer);
-  const [answer, setAnswer] = useState<string>(
-    MineAnswer === undefined ? "" : MineAnswer.answer
-  );
+  console.log("M", MineAnswer);
+  console.log("Q", QuestionTitle);
+
+  const [answer, setAnswer] = useState<string>("");
   const [BookMark, setBookMark] = useState<boolean>(false);
   const [Mycomment, setMyComment] = useState<boolean>(true);
   const [DifferntComment, setDifferntComment] = useState<boolean>(false);
@@ -77,9 +77,9 @@ const Detail = () => {
     <>
       <Header />
       <MinHead>
-        <img src={leftArrow} alt="이전 질문" />
+        {/* <img src={leftArrow} alt="이전 질문" /> */}
         <h3>Question #{id}</h3>
-        <img src={rightArrow} alt="다음 질문" />
+        {/* <img src={rightArrow} alt="다음 질문" /> */}
       </MinHead>
       <ListBox>
         <MListBox>
@@ -137,7 +137,7 @@ const MinHead = styled.div`
   width: 250px;
   height: 24px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 30px auto 35px auto;
 `;

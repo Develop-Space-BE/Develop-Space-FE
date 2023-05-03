@@ -49,7 +49,9 @@ const MyView = () => {
   const user = useAppSelector(User);
   const a = useAppSelector(myAnswerData);
   const b = useAppSelector(myLikeData);
-  console.log(a);
+
+  console.log("a", a);
+  console.log("b", b);
   const myCommentDispatch = () => {
     dispatch(__getMypageComment());
   };
@@ -108,7 +110,6 @@ export default MyView;
 
 const MyViewAll = styled.div`
   width: 100%;
-
   h3 {
     width: 100%;
     margin-top: 10px;
@@ -125,7 +126,7 @@ const MyPicture = styled.div`
 `;
 
 const ViewBox = styled.div`
-  height: 50%;
+  /* height: 50%; */
   background-color: ${(props) => props.theme.color.white};
 `;
 

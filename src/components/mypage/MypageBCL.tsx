@@ -12,10 +12,13 @@ const MypageBookMark: React.FC<MypageProps> = ({
   commentP,
   likeP,
 }) => {
-  const A = useAppSelector(myAnswerData);
-  const B = useAppSelector(myLikeData);
-  console.log(B);
+  const myAnswerDatas = useAppSelector(myAnswerData);
+  const myLikeDatas = useAppSelector(myLikeData);
+  const a = myAnswerDatas.length;
+  const b = myLikeDatas.length;
 
+  console.log(a);
+  console.log(b);
   return (
     <BookMarkDiv>
       <h5>
@@ -24,7 +27,7 @@ const MypageBookMark: React.FC<MypageProps> = ({
         {likeP ? "즐겨찾기" : ""}
       </h5>
       {bookmarkP
-        ? A.map((data, index) => (
+        ? myAnswerDatas.map((data, index) => (
             <ListBox key={index}>
               <MainList>
                 <MainListImg src={nobookmark} alt="북마크" />
@@ -35,7 +38,7 @@ const MypageBookMark: React.FC<MypageProps> = ({
         : ""}
 
       {commentP
-        ? A.map((data, index) => (
+        ? myAnswerDatas.map((data, index) => (
             <ListBox key={index}>
               <MainList>
                 <CommentLike>
@@ -47,7 +50,7 @@ const MypageBookMark: React.FC<MypageProps> = ({
           ))
         : ""}
       {likeP
-        ? B.map((data, index) => (
+        ? myLikeDatas.map((data, index) => (
             <ListBox key={index}>
               <MainList>
                 <CommentLike>
@@ -75,7 +78,6 @@ const BookMarkDiv = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   h5 {
     width: 90%;
     display: flex;
