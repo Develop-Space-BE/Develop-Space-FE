@@ -127,9 +127,10 @@ const MypageChart = () => {
 export default MypageChart;
 
 const ChartDiv = styled.div`
+  height: 58vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   h5 {
     width: 90%;

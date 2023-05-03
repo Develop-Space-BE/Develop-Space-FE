@@ -43,7 +43,7 @@ const List = () => {
 
   const Main = useAppSelector(MoList);
   const SubMain = useAppSelector(SoList);
-
+  console.log(Main);
   useEffect(() => {
     dispatch(__getMainList("ATTITUDE"));
   }, [dispatch]);
