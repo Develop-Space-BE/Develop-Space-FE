@@ -28,7 +28,6 @@ export const __getMyAnswer = createAsyncThunk(
       const {
         data: { data },
       } = await instanceAxios.get(`answer/${payload}`);
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -43,7 +42,6 @@ export const __getOtherAnswer = createAsyncThunk(
       const {
         data: { data },
       } = await instanceAxios.get(`answer/other/${payload}`);
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,7 +58,6 @@ export const __postMyAnswer = createAsyncThunk(
         answer: payload.answer,
       });
       // 답변 작성 통신한거 보면 배열 여러개가 생성되는 문제점 발생
-      console.log(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

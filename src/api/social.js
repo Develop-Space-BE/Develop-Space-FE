@@ -1,12 +1,10 @@
 import { instanceAxios } from "./apiConfig";
 
 export const kakao = async (K) => {
-  console.log(K)
   try {
-    const data = await instanceAxios.get(`/member/kakaologin?code=${K}`)
-    console.log(data)
+    const data = await instanceAxios.get(`/member/kakaologin?code=${K}`);
     return data;
-  } catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
-}
+};

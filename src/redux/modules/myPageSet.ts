@@ -66,7 +66,6 @@ export const __getMypageComment = createAsyncThunk(
           data: { myAnswerLists },
         },
       } = await instanceAxios.get(`answer/myanswer`);
-      console.log(myAnswerLists);
       return thunkAPI.fulfillWithValue(myAnswerLists);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

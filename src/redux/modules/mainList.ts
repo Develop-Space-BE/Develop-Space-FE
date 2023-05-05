@@ -43,7 +43,6 @@ export const __getMainSubList = createAsyncThunk(
       const {
         data: { data },
       } = await instanceAxios.get(`question/subcategory/${payload}`);
-      console.log("sub", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -57,6 +56,18 @@ export const __postBookMark = createAsyncThunk(
   async (payload: string | number | undefined, thunkAPI) => {
     try {
       const { data } = await instanceAxios.post(`question/bookmark/${payload}`);
+      console.log(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getChartView = createAsyncThunk(
+  "__getChartView",
+  async (payload, thunkAPI) => {
+    try {
+      const { data: data } = await instanceAxios.get("question/progress");
       console.log(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Charts from "react-apexcharts";
 import styled from "styled-components";
+import { useAppDispatch } from "../../redux/config/configStore";
+import { __getChartView } from "../../redux/modules/mainList";
 
 const MypageChart = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(__getChartView());
+  }, []);
+
   let option = {
     plotOptions: {
       radialBar: {
@@ -127,10 +135,9 @@ const MypageChart = () => {
 export default MypageChart;
 
 const ChartDiv = styled.div`
-  height: 58vh;
+  height: 55.5vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   h5 {
     width: 90%;
