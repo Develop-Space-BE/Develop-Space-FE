@@ -47,11 +47,7 @@ const MyView = () => {
   }, [dispatch]);
 
   const user = useAppSelector(User);
-  const a = useAppSelector(myAnswerData);
-  const b = useAppSelector(myLikeData);
 
-  console.log("a", a);
-  console.log("b", b);
   const myCommentDispatch = () => {
     dispatch(__getMypageComment());
   };

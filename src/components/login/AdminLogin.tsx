@@ -14,7 +14,6 @@ const AdminLogin = () => {
   const postLogin = async (post: object) => {
     try {
       const data = await instanceAxios.post(`/member/login`, post);
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);

@@ -10,7 +10,6 @@ import ListBox from "../common(공통컴포넌트)/ListBox";
 import { CommentLike, MainList, RowDiv, RowDiv2 } from "../mypage/MypageBCL";
 
 const DetailOtherView = ({ data }: { data: DetailData }) => {
-  console.log(data);
   const dispatch = useAppDispatch();
   const [likeCheck, setLikeCheck] = useState<boolean>(data.liked);
   const [likeCount, setLikeCount] = useState<number>(data.likeCount);
@@ -36,10 +35,10 @@ const DetailOtherView = ({ data }: { data: DetailData }) => {
               onClick={onClickLike}
             />
           </RowDiv>
-          <RowDiv2>
+          <RowDiv>
             <h6>{data.answer}</h6>
             <p>좋아요 {likeCount}</p>
-          </RowDiv2>
+          </RowDiv>
         </CommentLike>
       </MainList>
     </ListBox>
