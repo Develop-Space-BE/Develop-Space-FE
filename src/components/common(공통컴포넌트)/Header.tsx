@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -12,12 +12,17 @@ import {
   mainLogo,
   spacesuit,
 } from "../../asset/pic";
-import { useAppSelector } from "../../redux/config/configStore";
-import { User } from "../../redux/modules/myPageSet";
+import { useAppDispatch, useAppSelector } from "../../redux/config/configStore";
+import { User, __getUser } from "../../redux/modules/myPageSet";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
   const UserInfo = useAppSelector(User);
+
+  useEffect(() => {
+    dispatch(__getUser());
+  }, [dispatch]);
 
   const url: string = window.location.pathname;
   if (url.includes("mainlist")) {
@@ -31,7 +36,11 @@ const Header = () => {
         <img
           src={spacesuit}
           alt="마이페이지 버튼"
-          onClick={() => navigate(`/mypage/${UserInfo.nickname}`)}
+          onClick={() =>
+            UserInfo.email.includes("test")
+              ? navigate("/adminpage")
+              : navigate(`/mypage/${UserInfo.nickname}`)
+          }
         />
       </HeaderDiv>
     );
@@ -63,6 +72,20 @@ const Header = () => {
             onClick={() => navigate(`/mypage/${UserInfo.nickname}`)}
           />
           <h3>설정</h3>
+          <div />
+        </span>
+      </HeaderDiv2>
+    );
+  } else if (url.includes("adminpage")) {
+    return (
+      <HeaderDiv2>
+        <span>
+          <img
+            src={back}
+            alt="뒤로가기"
+            onClick={() => navigate(`/mainlist`)}
+          />
+          <h3>관리자</h3>
           <div />
         </span>
       </HeaderDiv2>

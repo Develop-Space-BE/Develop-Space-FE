@@ -50,4 +50,5 @@ export { default as headSpring } from "./HeadSpring.svg";
 export { default as headVue } from "./HeadVue.svg";
 export { default as save } from "./Save.svg";
 export { default as cancel } from "./Cancel.svg";
+export { default as edit } from "./edit.svg";
 // export {default as } from ""

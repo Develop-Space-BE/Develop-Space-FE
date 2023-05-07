@@ -1,15 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { back } from "../../asset/pic";
+import Header from "../common(공통컴포넌트)/Header";
 
 const AdminView = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <Hr3 />
-      <Admin>
-        <img src={back} alt="뒤로가기" />
-        <Ad>관리자</Ad>
-      </Admin>
+      {/* <Hr3 /> */}
+      <Header />
       <Hr2 />
       <Info>정보</Info>
       <Hr />
@@ -35,7 +35,7 @@ const AdminView = () => {
         <div>질문 관리</div>
       </Info2>
       <Hr />
-      <Info2>
+      <Info2 onClick={() => navigate("/questionWrite")}>
         <div>질문 작성</div>
       </Info2>
       <Hr />
