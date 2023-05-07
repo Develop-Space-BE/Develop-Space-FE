@@ -1,11 +1,12 @@
 import React from "react";
 import AdminView from "../components/adminPage/AdminView";
+import { Contain } from "./Home";
 
 const AdminPage = () => {
   return (
-    <div>
+    <Contain>
       <AdminView />
-    </div>
+    </Contain>
   );
 };
 

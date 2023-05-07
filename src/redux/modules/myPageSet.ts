@@ -73,6 +73,21 @@ export const __getMypageComment = createAsyncThunk(
   }
 );
 
+export const __putChangeNickname = createAsyncThunk(
+  "putNickname",
+  async (payload: string, thunkAPI) => {
+    console.log(payload);
+    try {
+      await instanceAxios.put("member/setting", {
+        nickname: payload,
+      });
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const myPageSet = createSlice({
   name: "myPageSet",
   initialState,
@@ -106,6 +121,16 @@ export const myPageSet = createSlice({
         state.Like = payload;
       })
       .addCase(__getLikeData.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoding = false;
+      })
+      .addCase(__putChangeNickname.pending, (state) => {
+        state.isLoding = true;
+      })
+      .addCase(__putChangeNickname.fulfilled, (state, { payload }) => {
+        state.User = { ...state.User, nickname: payload };
+      })
+      .addCase(__putChangeNickname.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoding = false;
       });

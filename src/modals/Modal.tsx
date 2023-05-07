@@ -29,11 +29,27 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
+  @media screen and (min-width: 1024px) {
+    width: 390px;
+    height: 100vh;
+    margin: 0 auto;
+  }
+  // 태블릿 화면
+  @media screen and (max-width: 1023px) {
+    width: 390px;
+    height: 100vh;
+    margin: 0 auto;
+  }
+  // 모바일 화면
+  @media screen and (max-width: 540px) {
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 const ChildrenBox = styled.dialog`
   width: 90%;
-  height: 60%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;

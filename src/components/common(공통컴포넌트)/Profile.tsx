@@ -5,6 +5,7 @@ import { User } from "../../redux/modules/myPageSet";
 
 const Profile = () => {
   const user = useAppSelector(User);
+  console.log(user);
   return (
     <div>
       <ProfileView>

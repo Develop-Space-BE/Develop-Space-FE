@@ -11,9 +11,9 @@ const QuestionAdd = () => {
         <Ad>질문 작성</Ad>
       </Head>
       <Cat>
-        <option>front-end</option>
-        <option>back-end</option>
-        <option>attitude</option>
+        <option value="FRONTEND">front-end</option>
+        <option value="BACKEND">back-end</option>
+        <option value="ATTITUDE">attitude</option>
       </Cat>
       <QName placeholder="질문 제목"></QName>
       <QBox placeholder="입력하기"></QBox>
@@ -28,6 +28,7 @@ const QuestionAdd = () => {
 export default QuestionAdd;
 
 const AA = styled.div`
+  height: 100vh;
   background-color: ${(props) => props.theme.color.lightGray};
 `;
 
@@ -56,7 +57,7 @@ const Cat = styled.select`
   display: flex;
   align-items: center;
   margin: 15px 35px 0px 35px;
-  padding-left: 25px;
+  padding-left: 10px;
   width: 342px;
   height: 40px;
   border: 1px solid ${(props) => props.theme.color.listWhite};

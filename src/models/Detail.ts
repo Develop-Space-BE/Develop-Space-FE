@@ -6,7 +6,12 @@ export interface MAW {
 export interface DetailData {
   id: number | string | undefined;
   nickname: string;
-  answer: string;
+  answer: string | undefined;
   likeCount: number;
   liked: boolean;
+}
+
+export interface EditAnswer {
+  AnswerId: number | string | undefined;
+  answer: string | undefined;
 }

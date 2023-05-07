@@ -5,6 +5,7 @@ import {
   bookmark,
   cancel,
   differntcomment,
+  edit,
   leftArrow,
   mycomment,
   nobookmark,
@@ -20,6 +21,7 @@ import {
   __getMyAnswer,
   __getOtherAnswer,
   __postMyAnswer,
+  __putAnswer,
 } from "../../redux/modules/detailAnswer";
 import {
   SoList,
@@ -42,19 +44,22 @@ const Detail = () => {
   }, [dispatch, id, title]);
 
   // 내답변 가져오기
-  const MineAnswer = useAppSelector(MyAnswer)[0];
+  const MineAnswer = useAppSelector(MyAnswer);
   // 다른 답변 가져오기
   const OthAnswer = useAppSelector(OtherAnswer);
   // 답변 내용 가져오기
-  const QuestionTitle = useAppSelector(SoList).filter((x) => x.id == id)[0];
-  console.log("M", MineAnswer);
-  console.log("Q", QuestionTitle);
+  const QuestionTitle = useAppSelector(SoList)[0];
 
+  console.log(MineAnswer);
   const [answer, setAnswer] = useState<string>("");
   const [BookMark, setBookMark] = useState<boolean>(false);
   const [Mycomment, setMyComment] = useState<boolean>(true);
   const [DifferntComment, setDifferntComment] = useState<boolean>(false);
-
+  const [editAns, setEditAns] = useState<boolean>(false);
+  if (MineAnswer === undefined) {
+    return MineAnswer;
+  }
+  const AnswerId = MineAnswer.id;
   const onClickBookmark2 = () => {
     dispatch(__postBookMark(id));
     setBookMark(!BookMark);
@@ -71,6 +76,14 @@ const Detail = () => {
 
   const onClickSave = () => {
     dispatch(__postMyAnswer({ id, answer }));
+  };
+
+  const onClickEdit = () => {
+    setEditAns(true);
+  };
+  const onClickEditTwo = () => {
+    dispatch(__putAnswer({ AnswerId, answer }));
+    setEditAns(false);
   };
 
   return (
@@ -108,16 +121,42 @@ const Detail = () => {
       <hr />
       {Mycomment === true ? (
         <div>
-          <QuestionBox
-            placeholder="입력하기 (500자 이내)"
-            maxLength={500}
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <ButtonBox>
-            <img src={cancel} alt="취소" />
-            <img src={save} alt="저장" onClick={onClickSave} />
-          </ButtonBox>
+          {MineAnswer === undefined ? (
+            <>
+              <QuestionBox
+                placeholder="입력하기 (500자 이내)"
+                maxLength={500}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+              <ButtonBox>
+                <img src={cancel} alt="취소" />
+                <img src={save} alt="저장" onClick={onClickSave} />
+              </ButtonBox>
+            </>
+          ) : editAns === true ? (
+            <>
+              <QuestionBox
+                placeholder="입력하기 (500자 이내)"
+                maxLength={500}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+              <ButtonBox>
+                <img src={cancel} alt="취소" />
+                <img src={save} alt="저장" onClick={onClickEditTwo} />
+              </ButtonBox>
+            </>
+          ) : (
+            <>
+              <QuestionView>
+                {MineAnswer === undefined ? "" : MineAnswer.answer}
+              </QuestionView>
+              <ButtonBox>
+                <img src={cancel} alt="취소" />
+                <img src={edit} alt="수정" onClick={onClickEdit} />
+              </ButtonBox>
+            </>
+          )}
+          {}
         </div>
       ) : (
         <>
@@ -162,6 +201,18 @@ const CommentsBox = styled.div`
 `;
 
 const QuestionBox = styled.textarea`
+  width: 90%;
+  height: 40vh;
+  display: flex;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  word-wrap: break-word;
+  word-break: break-word;
+`;
+
+const QuestionView = styled.div`
   width: 90%;
   height: 40vh;
   display: flex;

@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { instanceAxios } from "../../api/apiConfig";
-import { DetailData, MAW } from "../../models/Detail";
+import { DetailData, EditAnswer, MAW } from "../../models/Detail";
 import { RootState } from "../config/configStore";
 
 export interface DetailView {
@@ -17,7 +17,7 @@ const initialState = {
   error: null,
 } as DetailView;
 
-export const MyAnswer = (state: RootState) => state.detailBox.MAnswer;
+export const MyAnswer = (state: RootState) => state.detailBox.MAnswer[0];
 export const OtherAnswer = (state: RootState) => state.detailBox.OAnswer;
 
 // 내답변 조회
@@ -79,6 +79,21 @@ export const __postAnswerLike = createAsyncThunk(
   }
 );
 
+// 답변 수정
+export const __putAnswer = createAsyncThunk(
+  "putAnswer",
+  async (payload: EditAnswer, thunkAPI) => {
+    try {
+      const { data } = await instanceAxios.put(`answer/${payload.AnswerId}`, {
+        answer: payload.answer,
+      });
+      return thunkAPI.fulfillWithValue(payload.answer);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const DetailBox = createSlice({
   name: "DetailBox",
   initialState,
@@ -102,6 +117,16 @@ export const DetailBox = createSlice({
         state.OAnswer = payload;
       })
       .addCase(__getOtherAnswer.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoding = false;
+      })
+      .addCase(__putAnswer.pending, (state) => {
+        state.isLoding = true;
+      })
+      .addCase(__putAnswer.fulfilled, (state, { payload }) => {
+        state.MAnswer[0] = { ...state.MAnswer[0], answer: payload };
+      })
+      .addCase(__putAnswer.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoding = false;
       });

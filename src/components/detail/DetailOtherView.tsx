@@ -10,6 +10,7 @@ import ListBox from "../common(공통컴포넌트)/ListBox";
 import { CommentLike, MainList, RowDiv, RowDiv2 } from "../mypage/MypageBCL";
 
 const DetailOtherView = ({ data }: { data: DetailData }) => {
+  console.log(data);
   const dispatch = useAppDispatch();
   const [likeCheck, setLikeCheck] = useState<boolean>(data.liked);
   const [likeCount, setLikeCount] = useState<number>(data.likeCount);
