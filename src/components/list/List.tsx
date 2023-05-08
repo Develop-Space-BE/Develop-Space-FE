@@ -47,6 +47,8 @@ const List = () => {
     dispatch(__getMainList("ATTITUDE"));
   }, [dispatch]);
 
+  console.log(Main);
+
   // 대 분류 클릭시 공통, 프론트, 백엔드
   const onClickBigList = (at: boolean, fe: boolean, be: boolean): void => {
     setAttitudes(at);

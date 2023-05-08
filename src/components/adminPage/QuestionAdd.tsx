@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { back } from "../../asset/pic";
+import { useAppDispatch } from "../../redux/config/configStore";
+import { __postWriteContent } from "../../redux/modules/myPageSet";
 
 const QuestionAdd = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [firstCategory, setFirstCategory] = useState<string>("FRONTEND");
+  const [secondCategory, setSecondCategory] = useState<string>("React");
+  const [contents, setContents] = useState<string>("");
+  const writeData = {
+    category: firstCategory,
+    content: contents,
+    subcategory: secondCategory,
+  };
+  const onContentSave = () => {
+    dispatch(__postWriteContent(writeData));
+    navigate("/mainlist");
+  };
+
   return (
     <AA>
       <Hr3 />
@@ -10,16 +28,25 @@ const QuestionAdd = () => {
         <img src={back} alt="뒤로가기" />
         <Ad>질문 작성</Ad>
       </Head>
-      <Cat>
+      <Cat onChange={(e) => setFirstCategory(e.target.value)}>
         <option value="FRONTEND">front-end</option>
         <option value="BACKEND">back-end</option>
         <option value="ATTITUDE">attitude</option>
       </Cat>
-      <QName placeholder="질문 제목"></QName>
-      <QBox placeholder="입력하기"></QBox>
+      <Cat onChange={(e) => setSecondCategory(e.target.value)}>
+        <option value="React">React</option>
+        <option value="VUE">Vue</option>
+        <option value="ATTITUDE">attitude</option>
+        <option value="SPRING">spring</option>
+        <option value="NODE">node</option>
+      </Cat>
+      <QBox
+        placeholder="입력하기"
+        onChange={(e) => setContents(e.target.value)}
+      ></QBox>
       <BtnBox>
         <XBtn>취소</XBtn>
-        <SaveBtn>저장</SaveBtn>
+        <SaveBtn onClick={onContentSave}>저장</SaveBtn>
       </BtnBox>
     </AA>
   );
@@ -57,7 +84,7 @@ const Cat = styled.select`
   display: flex;
   align-items: center;
   margin: 15px 35px 0px 35px;
-  padding-left: 10px;
+  padding: 0 10px;
   width: 342px;
   height: 40px;
   border: 1px solid ${(props) => props.theme.color.listWhite};
@@ -80,10 +107,10 @@ const QName = styled.input`
   background-color: white;
 `;
 
-const QBox = styled.input`
+const QBox = styled.textarea`
   display: flex;
   margin: 15px 35px 0px 35px;
-  padding: 25px 0px 0px 25px;
+  padding: 25px 25px 0px 25px;
   width: 342px;
   height: 300px;
   border: 1px solid ${(props) => props.theme.color.listWhite};

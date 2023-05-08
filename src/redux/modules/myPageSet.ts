@@ -88,6 +88,18 @@ export const __putChangeNickname = createAsyncThunk(
   }
 );
 
+export const __postWriteContent = createAsyncThunk(
+  "postWriteContent",
+  async (payload: object, thunkAPI) => {
+    try {
+      const { data } = await instanceAxios.post("question", payload);
+      console.log(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const myPageSet = createSlice({
   name: "myPageSet",
   initialState,
