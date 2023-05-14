@@ -19,8 +19,6 @@ const MypageBookMark: React.FC<MypageProps> = ({
 
   const a = myAnswerDatas.length;
   const b = myLikeDatas.length;
-  console.log(myAnswerDatas);
-  console.log(myLikeDatas);
 
   return (
     <>

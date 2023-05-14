@@ -89,6 +89,8 @@ const List = () => {
     }
   };
 
+  const onStyles = () => {};
+
   return (
     <div>
       <ListChoose>
@@ -153,7 +155,15 @@ const List = () => {
         )}
       </ListCheck>
       {frontEnds || backEnds ? <Hr /> : ""}
-      <>
+      <BottomDiv
+        style={
+          Mockdata.length > 3
+            ? { height: "100%" }
+            : { height: "55.5vh" } || SubMain.length > 3
+            ? { height: "100%" }
+            : { height: "55.5vh" }
+        }
+      >
         {/* 처음은 큰분류로 나누고 그이후는 소분류로 데이터 받아오게 만듬 */}
         {attitudes || frontEnds || backEnds === true
           ? (frontEnds && reactView) ||
@@ -165,13 +175,13 @@ const List = () => {
                   <ListIn data={data} />
                 </ListBox>
               ))
-            : Main.map((data, index) => (
+            : Mockdata.map((data, index) => (
                 <ListBox key={index}>
                   <ListIn data={data} />
                 </ListBox>
               ))
           : ""}
-      </>
+      </BottomDiv>
     </div>
   );
 };
@@ -199,3 +209,107 @@ const ListCheck = styled.div`
 const Hr = styled.hr`
   color: ${(props) => props.theme.color.lightGray};
 `;
+
+const BottomDiv = styled.div`
+  width: 100%;
+  border: 1px solid red;
+`;
+
+const Mockdata = [
+  {
+    id: 1,
+    category: "ATTITUDE",
+    content: "제목1",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 2,
+    category: "ATTITUDE",
+    content: "제목2",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 3,
+    category: "ATTITUDE",
+    content: "제목3",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 4,
+    category: "ATTITUDE",
+    content: "제목4",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 5,
+    category: "ATTITUDE",
+    content: "제목5",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 6,
+    category: "ATTITUDE",
+    content: "제목6",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 7,
+    category: "ATTITUDE",
+    content: "제목7",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 8,
+    category: "ATTITUDE",
+    content: "제목8",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 9,
+    category: "ATTITUDE",
+    content: "제목9",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 10,
+    category: "ATTITUDE",
+    content: "제목10",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 11,
+    category: "ATTITUDE",
+    content: "제목11",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 12,
+    category: "ATTITUDE",
+    content: "제목12",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 13,
+    category: "ATTITUDE",
+    content: "제목13",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 14,
+    category: "ATTITUDE",
+    content: "제목14",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 15,
+    category: "ATTITUDE",
+    content: "제목15",
+    subcategory: "ATTITUDE",
+  },
+  {
+    id: 16,
+    category: "ATTITUDE",
+    content: "제목16",
+    subcategory: "ATTITUDE",
+  },
+];

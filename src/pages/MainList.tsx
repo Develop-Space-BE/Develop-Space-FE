@@ -16,7 +16,7 @@ export default MainList;
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   border: 1px solid black;
   background-color: ${(props) => props.theme.color.white};
 `;
