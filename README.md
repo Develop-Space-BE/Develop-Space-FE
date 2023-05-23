@@ -1,7 +1,5 @@
 # oncounter_FE
 <img src="https://velog.velcdn.com/images/koz8615/post/037575e5-705f-4a78-ba59-96c3529199d1/image.jpg" width=200px height=300px ></img>
-* [발표 영상](https://youtu.be/n04H7tXS7E8)
-* [노션](https://www.notion.so/Oncounter-Catalogue-056194f42de64dd298623dad40cc5f15)
 
 
 ## 🎙프로젝트 소개
